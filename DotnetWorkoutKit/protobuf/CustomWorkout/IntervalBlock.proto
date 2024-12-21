@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+option csharp_namespace = "DotnetWorkoutKit.Protobuf.CustomWorkout";
+
+import "WorkoutStep.proto";
+
+message IntervalBlock {
+    repeated IntervalStep interval_steps = 1;  // IntervalStep
+    uint32 iterations = 2; // Number of iterations
+
+    message IntervalStep {
+        enum IntervalPurpose {
+            UNSPECIFIED = 0;  // Default value
+            WORK = 1;
+            RECOVERY = 2;
+        }
+        IntervalPurpose purpose = 1;  // IntervalPurpose
+        WorkoutStep workout_step = 2;  // WorkoutStep
+    }
+}

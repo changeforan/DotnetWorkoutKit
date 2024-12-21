@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+option csharp_namespace = "DotnetWorkoutKit.Protobuf";
+
+import "CustomWorkout/CustomWorkout.proto";
+
+message WorkoutBinary {
+    string GUID = 9;
+    CustomWorkout custom_workout = 11;    
+}

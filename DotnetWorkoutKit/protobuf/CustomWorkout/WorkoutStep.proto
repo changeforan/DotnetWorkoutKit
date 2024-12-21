@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+option csharp_namespace = "DotnetWorkoutKit.Protobuf.CustomWorkout";
+
+import "Alert/WorkoutAlert.proto";
+import "WorkoutGoal.proto";
+
+message WorkoutStep {
+    WorkoutGoal workout_goal = 1;            // WorkoutGoal
+    optional WorkoutAlert workout_alert = 2; // WorkoutAlert (optional)
+    optional string display_name = 3;        // DisplayName (optional)
+}

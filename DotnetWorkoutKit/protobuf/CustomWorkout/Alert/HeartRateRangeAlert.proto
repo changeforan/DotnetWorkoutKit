@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+option csharp_namespace = "DotnetWorkoutKit.Protobuf.CustomWorkout.Alert";
+
+message HeartRateRangeAlert {
+    ClosedRange heart_rate_range = 2;  // HeartRateRange
+
+    message ClosedRange {
+        // Define fields for ClosedRange as needed
+        WrapDouble lower_bound = 1;  // Lower bound
+        WrapDouble upper_bound = 2;  // Upper bound
+    }
+
+    message WrapDouble {
+        // Define fields for WrapDouble as needed
+        double value = 1;  // Value
+    }
+}

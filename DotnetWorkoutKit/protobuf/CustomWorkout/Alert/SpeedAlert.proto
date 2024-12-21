@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+option csharp_namespace = "DotnetWorkoutKit.Protobuf.CustomWorkout.Alert";
+
+message SpeedAlert {
+    SpeedRangeAlert speed_range_alert = 2;  // SpeedRangeAlert
+
+    message SpeedRangeAlert {
+        SpeedBound lower_bound = 1;  // Lower bound
+        SpeedBound upper_bound = 2;  // Upper bound
+    }
+
+    message SpeedBound {
+        Speed speed = 1;  // Lower bound
+        Unknown_WrapUInt32_Fixed64 unknown = 2;  // Unknown
+    }
+
+    message Speed {
+        enum SpeedUnitEnum {
+            UNSPECIFIED = 0;  // Default value
+            METERS_PER_SECOND = 1;
+        }
+
+        SpeedUnitEnum unit = 1;
+        double speed = 2;  // speed in m/s
+    }
+    message Unknown_WrapUInt32_Fixed64 {
+        uint32 first = 1;  // Unknown, always 1
+        double second = 2;  // Unknown, always 1
+    }
+}

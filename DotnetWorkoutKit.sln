@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotnetWorkoutKit", "DotnetWorkoutKit\DotnetWorkoutKit.csproj", "{13851E54-C001-4C7C-9063-71610B8FFC00}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorkoutKit.ConsoleApp", "WorkoutKit.ConsoleApp\WorkoutKit.ConsoleApp.csproj", "{62CAF9FF-48BE-4E5D-9E0C-7DF07A0F3F14}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{13851E54-C001-4C7C-9063-71610B8FFC00}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{13851E54-C001-4C7C-9063-71610B8FFC00}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{13851E54-C001-4C7C-9063-71610B8FFC00}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{13851E54-C001-4C7C-9063-71610B8FFC00}.Release|Any CPU.Build.0 = Release|Any CPU
+		{62CAF9FF-48BE-4E5D-9E0C-7DF07A0F3F14}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{62CAF9FF-48BE-4E5D-9E0C-7DF07A0F3F14}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{62CAF9FF-48BE-4E5D-9E0C-7DF07A0F3F14}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{62CAF9FF-48BE-4E5D-9E0C-7DF07A0F3F14}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

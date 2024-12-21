@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+option csharp_namespace = "DotnetWorkoutKit.Protobuf.CustomWorkout";
+
+import "WorkoutStep.proto";
+import "IntervalBlock.proto";
+
+message CustomWorkout {
+    enum ActivityType {
+        UNSPECIFIED_ActivityType = 0;  // Default value
+        RUNNING = 37;
+    }
+
+    enum LocationType {
+        UNSPECIFIED_LocationType = 0;  // Default value
+        INDOOR = 2;
+        OUTDOOR = 3;
+    }
+
+    ActivityType activity_type = 1;              // ActivityType
+    LocationType location_type = 2;              // LocationType
+    optional string display_name = 3;            // DisplayName (optional)
+    optional WorkoutStep warmup = 4;             // Warmup (optional)
+    repeated IntervalBlock interval_blocks = 5;  // IntervalBlock
+    optional WorkoutStep cooldown = 6;           // Cooldown (optional)
+}

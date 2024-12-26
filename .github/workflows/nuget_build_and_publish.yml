@@ -32,10 +32,13 @@ jobs:
       - name: Pack
         run: dotnet pack -c Release -o ./nupkg /p:PackageVersion=${{ steps.get_version_prefix.outputs.version_prefix }}.${{ github.run_number }}
 
+      - name: List nupkg directory contents
+        run: ls -la ./nupkg
+
       - name: Publish to artifact
         uses: actions/upload-artifact@v4
         with:
-          path: nupkg/*.nupkg
+          path: ./nupkg/DotnetWorkoutKit.*.nupkg
       
       - name: Publish to NuGet
         run: dotnet nuget push ./nupkg/*.nupkg --api-key ${{ secrets.NUGET_PUBLISH_KEY }} --source https://api.nuget.org/v3/index.json

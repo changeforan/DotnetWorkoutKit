@@ -1,0 +1,45 @@
+name: Build and Publish NuGet Package
+
+on:
+  push:
+    branches: ["main"]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./DotnetWorkoutKit
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Restore dependencies
+        run: dotnet restore
+
+      - name: Get VersionPrefix
+        id: get_version_prefix
+        run: echo "::set-output name=version_prefix::$(grep '<VersionPrefix>' DotnetWorkoutKit.csproj | sed -E 's/.*<VersionPrefix>(.*)<\/VersionPrefix>.*/\1/')"
+      
+      - name: Build
+        run: dotnet build --configuration Release
+
+      - name: Pack
+        run: dotnet pack -c Release -o ./nupkg /p:PackageVersion=${{ steps.get_version_prefix.outputs.version_prefix }}.${{ github.run_number }}
+
+      - name: List nupkg directory contents
+        run: ls -la ./nupkg
+
+      - name: Publish to artifact
+        uses: actions/upload-artifact@v4
+        with:
+          path: ./DotnetWorkoutKit/nupkg/DotnetWorkoutKit.*.nupkg
+
+      - name: Publish to NuGet
+        run: dotnet nuget push ./nupkg/*.nupkg --api-key ${{ secrets.NUGET_PUBLISH_KEY }} --source https://api.nuget.org/v3/index.json
+    

@@ -35,10 +35,7 @@ jobs:
       - name: Publish to artifact
         uses: actions/upload-artifact@v4
         with:
-          name: nupkg
-          path: ./nupkg/*.nupkg
+          path: nupkg/*.nupkg
       
       - name: Publish to NuGet
-        run: dotnet nuget push ./nupkg/*.nupkg --api-key $env:NUGET_API_KEY --source https://api.nuget.org/v3/index.json
-        env:
-          NUGET_API_KEY: ${{ secrets.NUGET_PUBLISH_KEY }}
+        run: dotnet nuget push ./nupkg/*.nupkg --api-key ${{ secrets.NUGET_PUBLISH_KEY }} --source https://api.nuget.org/v3/index.json

@@ -7,6 +7,9 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./DotnetWorkoutKit
 
     steps:
       - uses: actions/checkout@v4
@@ -15,10 +18,7 @@ jobs:
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '8.0.x'
-      
-      - name: cd to src
-        run: cd DotnetWorkoutKit
-      
+
       - name: Restore dependencies
         run: dotnet restore
 

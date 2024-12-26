@@ -12,7 +12,7 @@ using scg = global::System.Collections.Generic;
 namespace DotnetWorkoutKit.Protobuf.CustomWorkout.Alert {
 
   /// <summary>Holder for reflection information generated from CustomWorkout/Alert/SpeedAlert.proto</summary>
-  public static partial class SpeedAlertReflection {
+  internal static partial class SpeedAlertReflection {
 
     #region Descriptor
     /// <summary>File descriptor for CustomWorkout/Alert/SpeedAlert.proto</summary>
@@ -51,7 +51,7 @@ namespace DotnetWorkoutKit.Protobuf.CustomWorkout.Alert {
   }
   #region Messages
   [global::System.Diagnostics.DebuggerDisplayAttribute("{ToString(),nq}")]
-  public sealed partial class SpeedAlert : pb::IMessage<SpeedAlert>
+  internal sealed partial class SpeedAlert : pb::IMessage<SpeedAlert>
   #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       , pb::IBufferMessage
   #endif
@@ -264,7 +264,7 @@ namespace DotnetWorkoutKit.Protobuf.CustomWorkout.Alert {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static partial class Types {
       [global::System.Diagnostics.DebuggerDisplayAttribute("{ToString(),nq}")]
-      public sealed partial class SpeedRangeAlert : pb::IMessage<SpeedRangeAlert>
+      internal sealed partial class SpeedRangeAlert : pb::IMessage<SpeedRangeAlert>
       #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
           , pb::IBufferMessage
       #endif
@@ -523,7 +523,7 @@ namespace DotnetWorkoutKit.Protobuf.CustomWorkout.Alert {
       }
 
       [global::System.Diagnostics.DebuggerDisplayAttribute("{ToString(),nq}")]
-      public sealed partial class SpeedBound : pb::IMessage<SpeedBound>
+      internal sealed partial class SpeedBound : pb::IMessage<SpeedBound>
       #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
           , pb::IBufferMessage
       #endif
@@ -782,7 +782,7 @@ namespace DotnetWorkoutKit.Protobuf.CustomWorkout.Alert {
       }
 
       [global::System.Diagnostics.DebuggerDisplayAttribute("{ToString(),nq}")]
-      public sealed partial class Speed : pb::IMessage<Speed>
+      internal sealed partial class Speed : pb::IMessage<Speed>
       #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
           , pb::IBufferMessage
       #endif
@@ -1022,7 +1022,7 @@ namespace DotnetWorkoutKit.Protobuf.CustomWorkout.Alert {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
         public static partial class Types {
-          public enum SpeedUnitEnum {
+          internal enum SpeedUnitEnum {
             /// <summary>
             /// Default value
             /// </summary>
@@ -1036,7 +1036,7 @@ namespace DotnetWorkoutKit.Protobuf.CustomWorkout.Alert {
       }
 
       [global::System.Diagnostics.DebuggerDisplayAttribute("{ToString(),nq}")]
-      public sealed partial class Unknown_WrapUInt32_Fixed64 : pb::IMessage<Unknown_WrapUInt32_Fixed64>
+      internal sealed partial class Unknown_WrapUInt32_Fixed64 : pb::IMessage<Unknown_WrapUInt32_Fixed64>
       #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
           , pb::IBufferMessage
       #endif

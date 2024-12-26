@@ -85,5 +85,7 @@ StyleCopReport.xml
 
 # MacOS
 .DS_Store
-DotnetWorkoutKit/protoc
+
+# Binary
+protoc
 *.workout

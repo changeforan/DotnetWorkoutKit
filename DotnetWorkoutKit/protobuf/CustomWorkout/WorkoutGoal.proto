@@ -10,11 +10,9 @@ message WorkoutGoal {
         OPEN = 4;
     }
     GoalType goal_type = 1;           // GoalType
-    oneof goal {
-        TimeGoal time_goal = 2;         // Time goal (if goal_type == 1)
-        DistanceGoal distance_goal = 4;     // Distance goal (if goal_type == 3)
-        // Open goal has no additional fields (if goal_type == 4)
-    }
+    TimeGoal time_goal = 2;         // Time goal (if goal_type == 1)
+    DistanceGoal distance_goal = 4;     // Distance goal (if goal_type == 3)
+    // Open goal has no additional fields (if goal_type == 4)
 
     message TimeGoal {
         enum TimeUnitType {

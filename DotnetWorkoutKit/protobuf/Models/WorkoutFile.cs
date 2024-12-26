@@ -12,7 +12,7 @@ using scg = global::System.Collections.Generic;
 namespace DotnetWorkoutKit.Protobuf {
 
   /// <summary>Holder for reflection information generated from WorkoutFile.proto</summary>
-  public static partial class WorkoutFileReflection {
+  internal static partial class WorkoutFileReflection {
 
     #region Descriptor
     /// <summary>File descriptor for WorkoutFile.proto</summary>
@@ -39,7 +39,7 @@ namespace DotnetWorkoutKit.Protobuf {
   }
   #region Messages
   [global::System.Diagnostics.DebuggerDisplayAttribute("{ToString(),nq}")]
-  public sealed partial class WorkoutBinary : pb::IMessage<WorkoutBinary>
+  internal sealed partial class WorkoutBinary : pb::IMessage<WorkoutBinary>
   #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       , pb::IBufferMessage
   #endif

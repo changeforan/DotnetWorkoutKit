@@ -7,11 +7,35 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Google.Protobuf" Version="3.29.1" />
+    <PackageReference Include="Google.Protobuf" Version="3.29.2" />
+    <PackageReference Include="Google.Protobuf.Tools" Version="3.29.2" GeneratePathProperty="true"/>
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Models/" />
   </ItemGroup>
+
+  <PropertyGroup>
+    <IsWindows Condition="'$([System.Runtime.InteropServices.RuntimeInformation]::IsOSPlatform($([System.Runtime.InteropServices.OSPlatform]::Windows)))' == 'true'">true</IsWindows>
+    <IsOSX Condition="'$([System.Runtime.InteropServices.RuntimeInformation]::IsOSPlatform($([System.Runtime.InteropServices.OSPlatform]::OSX)))' == 'true'">true</IsOSX>
+    <IsLinux Condition="'$([System.Runtime.InteropServices.RuntimeInformation]::IsOSPlatform($([System.Runtime.InteropServices.OSPlatform]::Linux)))' == 'true'">true</IsLinux>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <ProtocPath Condition="'$(IsOSX)'=='true'">$(PkgGoogle_Protobuf_Tools)/tools/macosx_x64/protoc</ProtocPath>
+    <ProtocPath Condition="'$(IsWindows)'=='true'">$(PkgGoogle_Protobuf_Tools)/tools/windows_x64/protoc.exe</ProtocPath>
+    <ProtocPath Condition="'$(IsLinux)'=='true'">$(PkgGoogle_Protobuf_Tools)/tools/linux_x64/protoc</ProtocPath>
+  </PropertyGroup>
+
+  <Target Condition="'$(IsOSX)'=='true'" Name="GenerateProtoModels" BeforeTargets="BeforeBuild">
+    <Exec Command="$(ProtocPath) -I=$(MsBuildProjectDirectory)/protobuf -I=$(MsBuildProjectDirectory)/protobuf/CustomWorkout -I=$(MsBuildProjectDirectory)/protobuf/CustomWorkout/Alert  --csharp_out=$(MsBuildProjectDirectory)/protobuf/Models --csharp_opt=internal_access $(MsBuildProjectDirectory)/protobuf/CustomWorkout/Alert/HeartRateRangeAlert.proto" />
+    <Exec Command="$(ProtocPath) -I=$(MsBuildProjectDirectory)/protobuf -I=$(MsBuildProjectDirectory)/protobuf/CustomWorkout -I=$(MsBuildProjectDirectory)/protobuf/CustomWorkout/Alert  --csharp_out=$(MsBuildProjectDirectory)/protobuf/Models --csharp_opt=internal_access $(MsBuildProjectDirectory)/protobuf/CustomWorkout/Alert/SpeedAlert.proto" />
+    <Exec Command="$(ProtocPath) -I=$(MsBuildProjectDirectory)/protobuf -I=$(MsBuildProjectDirectory)/protobuf/CustomWorkout -I=$(MsBuildProjectDirectory)/protobuf/CustomWorkout/Alert  --csharp_out=$(MsBuildProjectDirectory)/protobuf/Models --csharp_opt=internal_access $(MsBuildProjectDirectory)/protobuf/WorkoutFile.proto" />
+    <Exec Command="$(ProtocPath) -I=$(MsBuildProjectDirectory)/protobuf -I=$(MsBuildProjectDirectory)/protobuf/CustomWorkout -I=$(MsBuildProjectDirectory)/protobuf/CustomWorkout/Alert  --csharp_out=$(MsBuildProjectDirectory)/protobuf/Models --csharp_opt=internal_access $(MsBuildProjectDirectory)/protobuf/CustomWorkout/Alert/WorkoutAlert.proto" />
+    <Exec Command="$(ProtocPath) -I=$(MsBuildProjectDirectory)/protobuf -I=$(MsBuildProjectDirectory)/protobuf/CustomWorkout -I=$(MsBuildProjectDirectory)/protobuf/CustomWorkout/Alert  --csharp_out=$(MsBuildProjectDirectory)/protobuf/Models --csharp_opt=internal_access $(MsBuildProjectDirectory)/protobuf/CustomWorkout/CustomWorkout.proto" />
+    <Exec Command="$(ProtocPath) -I=$(MsBuildProjectDirectory)/protobuf -I=$(MsBuildProjectDirectory)/protobuf/CustomWorkout -I=$(MsBuildProjectDirectory)/protobuf/CustomWorkout/Alert  --csharp_out=$(MsBuildProjectDirectory)/protobuf/Models --csharp_opt=internal_access $(MsBuildProjectDirectory)/protobuf/CustomWorkout/IntervalBlock.proto" />
+    <Exec Command="$(ProtocPath) -I=$(MsBuildProjectDirectory)/protobuf -I=$(MsBuildProjectDirectory)/protobuf/CustomWorkout -I=$(MsBuildProjectDirectory)/protobuf/CustomWorkout/Alert  --csharp_out=$(MsBuildProjectDirectory)/protobuf/Models --csharp_opt=internal_access $(MsBuildProjectDirectory)/protobuf/CustomWorkout/WorkoutGoal.proto" />
+    <Exec Command="$(ProtocPath) -I=$(MsBuildProjectDirectory)/protobuf -I=$(MsBuildProjectDirectory)/protobuf/CustomWorkout -I=$(MsBuildProjectDirectory)/protobuf/CustomWorkout/Alert  --csharp_out=$(MsBuildProjectDirectory)/protobuf/Models --csharp_opt=internal_access $(MsBuildProjectDirectory)/protobuf/CustomWorkout/WorkoutStep.proto" />
+  </Target>
 
 </Project>

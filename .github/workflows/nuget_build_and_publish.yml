@@ -38,5 +38,5 @@ jobs:
       - name: Publish to artifact
         uses: actions/upload-artifact@v4
         with:
-          path: ./nupkg/**/DotnetWorkoutKit.*.nupkg
+          path: nupkg/
     

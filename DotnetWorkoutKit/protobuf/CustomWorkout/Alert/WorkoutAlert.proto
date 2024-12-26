@@ -15,8 +15,6 @@ message WorkoutAlert {
 
     AlertMetricEnum alert_metric = 1;
     uint32 unknown = 2;  // Unknown, 2 = range type
-    oneof alert {
-        SpeedAlert speed_alert = 4;
-        HeartRateRangeAlert heart_rate_range_alert = 7;
-    }
+    SpeedAlert speed_alert = 4;
+    HeartRateRangeAlert heart_rate_range_alert = 7;
 }

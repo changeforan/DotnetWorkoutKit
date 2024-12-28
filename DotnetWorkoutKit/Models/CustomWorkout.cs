@@ -1,16 +1,17 @@
+using System.Text.Json.Serialization;
 using static DotnetWorkoutKit.Models.CustomWorkout;
 
 namespace DotnetWorkoutKit.Models;
 
-public class CustomWorkout(ActivityType activityType, LocationType locationType,
+public class CustomWorkout(ActivityType activity, LocationType location,
     string? displayName, WorkoutStep? warmUp, IntervalBlock[] blocks, WorkoutStep? coolDown)
 {
 
-    public ActivityType Activity { get; } = ValidateActivityType(activityType)
-        ? activityType
+    public ActivityType Activity { get; } = ValidateActivityType(activity)
+        ? activity
         : throw new ArgumentException("Only running is supported now.");
     
-    public LocationType Location { get; } = locationType;
+    public LocationType Location { get; } = location;
 
     public string? DisplayName { get; } = displayName;
 
@@ -20,6 +21,7 @@ public class CustomWorkout(ActivityType activityType, LocationType locationType,
 
     public WorkoutStep? CoolDown { get; } = coolDown;
 
+    [JsonConverter(typeof(JsonStringEnumConverter<ActivityType>))]
     public enum ActivityType
     {
         Running,
@@ -27,6 +29,7 @@ public class CustomWorkout(ActivityType activityType, LocationType locationType,
         Swimming
     }
 
+    [JsonConverter(typeof(JsonStringEnumConverter<LocationType>))]
     public enum LocationType
     {
         Indoor,

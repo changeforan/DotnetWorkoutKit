@@ -2,18 +2,29 @@
 using DotnetWorkoutKit.Models;
 
 var customWorkout = new CustomWorkout(
-        CustomWorkout.ActivityType.Running, 
-        CustomWorkout.LocationType.Outdoor,
-        "E8k Interval",
-        new WorkoutStep(new DistanceGoal(2, DistanceGoal.DistanceUnitType.Kilometers), null, "warm up"),
-        [
-            new IntervalBlock([new (IntervalStep.PurposeType.Work, new (new DistanceGoal(8, DistanceGoal.DistanceUnitType.Kilometers), new HeartRateRangeAlert(144, 153)))], 1),
+        activity: CustomWorkout.ActivityType.Running, 
+        location: CustomWorkout.LocationType.Outdoor,
+        displayName: "sample",
+        warmUp: new WorkoutStep(new DistanceGoal(3, DistanceGoal.DistanceUnit.Kilometers), new HeartRateRangeAlert(144, 153), "Warm Up"),
+        blocks: [
             new IntervalBlock([
-                new (IntervalStep.PurposeType.Work, new (new DistanceGoal(100, DistanceGoal.DistanceUnitType.Meters), new SpeedRangeAlert(11, 12))),
+                new (IntervalStep.PurposeType.Work, new (new DistanceGoal(3, DistanceGoal.DistanceUnit.Kilometers), new SpeedRangeAlert("4'46\"", "4'38\""))),
                 new (IntervalStep.PurposeType.Recovery, new (new TimeGoal(TimeSpan.FromMinutes(2))))
-                ], 8)
+                ], 2),
+            new IntervalBlock([
+                new (IntervalStep.PurposeType.Work, new (new DistanceGoal(200, DistanceGoal.DistanceUnit.Meters), new SpeedRangeAlert("4'09\"", "3'59\""))),
+                new (IntervalStep.PurposeType.Recovery, new (new DistanceGoal(200, DistanceGoal.DistanceUnit.Meters)))
+                ], 6)
         ],
-        new WorkoutStep(new DistanceGoal(2, DistanceGoal.DistanceUnitType.Kilometers), new SpeedRangeAlert("5'40\"", "5'20\""), "cool down"));
+        coolDown: new WorkoutStep(new DistanceGoal(3, DistanceGoal.DistanceUnit.Kilometers), new HeartRateRangeAlert(144, 153), "Cool Down"));
 
-// Save to file
-File.WriteAllBytes("test.workout", customWorkout.DataRepresentation());
+// Save as JSON
+File.WriteAllText($"{customWorkout.DisplayName}.workout.json", customWorkout.JsonRepresentation());
+
+// Save as binary
+File.WriteAllBytes($"{customWorkout.DisplayName}.workout", customWorkout.DataRepresentation());
+
+// Load from JSON
+var _ = File.ReadAllText($"{customWorkout.DisplayName}.workout.json").LoadFromJson();
+
+Console.WriteLine("Sample workout created and saved as JSON and binary files.");

@@ -8,7 +8,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <AssemblyTitle>DotnetWorkoutKit</AssemblyTitle>
-    <VersionPrefix>1.0.0</VersionPrefix>
+    <VersionPrefix>1.0.1</VersionPrefix>
     <Authors>changeforan@gmail.com</Authors>
     <AssemblyName>DotnetWorkoutKit</AssemblyName>
     <PackageId>DotnetWorkoutKit</PackageId>

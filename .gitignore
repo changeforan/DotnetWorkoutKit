@@ -89,3 +89,4 @@ StyleCopReport.xml
 # Binary
 protoc
 *.workout
+!sample.workout

@@ -1,5 +1,9 @@
 # DotnetWorkoutKit
 
+|  Package  | Latest Release |
+|:---------:|:--------------:|
+| DotnetWorkoutKit | [![NuGet](https://img.shields.io/nuget/v/DotnetWorkoutKit.svg)](https://www.nuget.org/packages/DotnetWorkoutKit) ![Downloads](https://img.shields.io/nuget/dt/DotnetWorkoutKit.svg?style=flat-square)|
+
 ## What is DotnetWorkoutKit?
 
 DotnetWorkoutKit is a cross-platform .NET library that provides a way to create custom workout files for Apple Watch.

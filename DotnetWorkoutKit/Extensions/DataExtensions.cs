@@ -1,10 +1,13 @@
-namespace DotnetWorkoutKit.Extensions;
-
+using System.Text.Json;
+using System.Text.Json.Serialization;
+using DotnetWorkoutKit.JsonConverters;
 using DotnetWorkoutKit.Protobuf;
 using DotnetWorkoutKit.Protobuf.CustomWorkout;
 using DotnetWorkoutKit.Protobuf.CustomWorkout.Alert;
 using Google.Protobuf;
 using static DotnetWorkoutKit.Protobuf.CustomWorkout.WorkoutGoal.Types;
+
+namespace DotnetWorkoutKit.Extensions;
 
 public static class DataExtensions
 {
@@ -25,6 +28,22 @@ public static class DataExtensions
 
         return [.. data, .. endBlock];
     }
+
+    public static string JsonRepresentation(this Models.CustomWorkout customWorkout)
+    {
+        return JsonSerializer.Serialize(customWorkout, _jsonOptions);
+    }
+
+    public static Models.CustomWorkout? LoadFromJson(this string json)
+    {
+        return JsonSerializer.Deserialize<Models.CustomWorkout>(json);
+    }
+
+    private static readonly JsonSerializerOptions _jsonOptions = new()
+    {
+        WriteIndented = true,
+        DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
+    };
 
     private static CustomWorkout ConvertToCustomWorkout(Models.CustomWorkout customWorkout)
     {
@@ -116,7 +135,7 @@ public static class DataExtensions
                             Speed = new SpeedAlert.Types.Speed
                             {
                                 Unit = SpeedAlert.Types.Speed.Types.SpeedUnitEnum.MetersPerSecond,
-                                Speed_ = CalculateSpeed(speedRangeAlert.MinSpeed, speedRangeAlert.SpeedUnit)
+                                Speed_ = CalculateSpeed(speedRangeAlert.MinSpeed, speedRangeAlert.Unit)
                             },
                             Unknown = new SpeedAlert.Types.Unknown_WrapUInt32_Fixed64
                             {
@@ -129,7 +148,7 @@ public static class DataExtensions
                             Speed = new SpeedAlert.Types.Speed
                             {
                                 Unit = SpeedAlert.Types.Speed.Types.SpeedUnitEnum.MetersPerSecond,
-                                Speed_ = CalculateSpeed(speedRangeAlert.MaxSpeed, speedRangeAlert.SpeedUnit)
+                                Speed_ = CalculateSpeed(speedRangeAlert.MaxSpeed, speedRangeAlert.Unit)
                             },
                             Unknown = new SpeedAlert.Types.Unknown_WrapUInt32_Fixed64
                             {
@@ -144,13 +163,13 @@ public static class DataExtensions
         };
     }
 
-    private static double CalculateSpeed(double speed, Models.SpeedRangeAlert.UnitSpeed speedUnit)
+    private static double CalculateSpeed(double speed, Models.SpeedRangeAlert.SpeedUnit speedUnit)
     {
         return speedUnit switch
         {
-            Models.SpeedRangeAlert.UnitSpeed.MetersPerSecond => speed,
-            Models.SpeedRangeAlert.UnitSpeed.KilometersPerHour => speed / 3.6,
-            Models.SpeedRangeAlert.UnitSpeed.MilesPerHour => speed / 2.237,
+            Models.SpeedRangeAlert.SpeedUnit.MetersPerSecond => speed,
+            Models.SpeedRangeAlert.SpeedUnit.KilometersPerHour => speed / 3.6,
+            Models.SpeedRangeAlert.SpeedUnit.MilesPerHour => speed / 2.237,
             _ => throw new ArgumentException("Only meters per second, kilometers per hour, miles per hour, and pace are supported now.")
         };
     }
@@ -170,10 +189,10 @@ public static class DataExtensions
             {
                 Models.DistanceGoal distanceGoal => new DistanceGoal
                 {
-                    UnitType = distanceGoal.UnitType switch
+                    UnitType = distanceGoal.Unit switch
                     {
-                        Models.DistanceGoal.DistanceUnitType.Meters => DistanceGoal.Types.DistanceUnitType.Meters,
-                        Models.DistanceGoal.DistanceUnitType.Kilometers => DistanceGoal.Types.DistanceUnitType.Kilometers,
+                        Models.DistanceGoal.DistanceUnit.Meters => DistanceGoal.Types.DistanceUnitType.Meters,
+                        Models.DistanceGoal.DistanceUnit.Kilometers => DistanceGoal.Types.DistanceUnitType.Kilometers,
                         _ => DistanceGoal.Types.DistanceUnitType.Unspecified
                     },
                     UnitValue = distanceGoal.Distance

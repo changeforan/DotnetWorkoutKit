@@ -16,6 +16,8 @@ So I decoded the binary format of the `.workout` file and created this library t
 
 - Create a `CustomWorkout` with C# code.
 - Save `CustomWorkout` as a `.workout` file, which can be previewed on your iPhone and imported to Apple Watch.
+- Save `CustomWorkout` as a JSON file, which can be shared with others.
+- Load a `CustomWorkout` from a JSON file.
 
 ## Limitations
 
@@ -25,35 +27,68 @@ So I decoded the binary format of the `.workout` file and created this library t
 
 ## Using DotnetWorkoutKit
 
-1. Create a `CustomWorkout` and save it as a `.workout` file.
+1. Create a `CustomWorkout` or load it from a JSON file.
 
 ```csharp
-using DotnetWorkoutKit.Extensions;
-using DotnetWorkoutKit.Models;
-
+// Create a custom workout
 var customWorkout = new CustomWorkout(
-        CustomWorkout.ActivityType.Running, 
-        CustomWorkout.LocationType.Outdoor,
-        "E8k Interval",
-        new WorkoutStep(new DistanceGoal(2, DistanceGoal.DistanceUnitType.Kilometers), null, "warm up"),
-        [
-            new IntervalBlock([new (IntervalStep.PurposeType.Work, new (new DistanceGoal(8, DistanceGoal.DistanceUnitType.Kilometers), new HeartRateRangeAlert(144, 153)))], 1),
+        activity: CustomWorkout.ActivityType.Running, 
+        location: CustomWorkout.LocationType.Outdoor,
+        displayName: "sample",
+        warmUp: new WorkoutStep(new DistanceGoal(3, DistanceGoal.DistanceUnit.Kilometers), new HeartRateRangeAlert(144, 153), "Warm Up"),
+        blocks: [
             new IntervalBlock([
-                new (IntervalStep.PurposeType.Work, new (new DistanceGoal(100, DistanceGoal.DistanceUnitType.Meters), new SpeedRangeAlert(11, 12))),
+                new (IntervalStep.PurposeType.Work, new (new DistanceGoal(3, DistanceGoal.DistanceUnit.Kilometers), new SpeedRangeAlert("4'46\"", "4'38\""))), // The speed can be defined as pace.
                 new (IntervalStep.PurposeType.Recovery, new (new TimeGoal(TimeSpan.FromMinutes(2))))
-                ], 8)
+                ], 2),
+            new IntervalBlock([
+                new (IntervalStep.PurposeType.Work, new (new DistanceGoal(200, DistanceGoal.DistanceUnit.Meters), new SpeedRangeAlert("4'09\"", "3'59\""))),
+                new (IntervalStep.PurposeType.Recovery, new (new DistanceGoal(200, DistanceGoal.DistanceUnit.Meters)))
+                ], 6)
         ],
-        new WorkoutStep(new DistanceGoal(2, DistanceGoal.DistanceUnitType.Kilometers), new SpeedRangeAlert("5'40\"", "5'20\""), "cool down"));
+        coolDown: new WorkoutStep(new DistanceGoal(3, DistanceGoal.DistanceUnit.Kilometers), new HeartRateRangeAlert(144, 153), "Cool Down"));
 
-// Save to file
-File.WriteAllBytes("test.workout", customWorkout.DataRepresentation());
+// Or load from JSON
+var json = """
+{
+  "Activity": "Running",
+  "Location": "Outdoor",
+  "DisplayName": "simple",
+  "WarmUp": {
+    "Goal": {
+      "Distance": 3,
+      "Unit": "Kilometers"
+    },
+    "Alert": {
+      "MinSpeed": "5'40\"",
+      "MaxSpeed": "5'00\""
+    },
+    "DisplayName": "Warm Up"
+  },
+  "Blocks": []
+}
+"""
+
+var customWorkout = json.LoadFromJson();
 ```
 
-2. Share the `.workout` file to your iPhone through AirDrop or other methods.
+> You can find the example in the project `WorkoutKit.ConsoleApp` which is for local testing.
 
-3. You can preview the workout on your iPhone and import it to Apple Watch.
+2. Save the `CustomWorkout` as a `.workout` file or a JSON file.
 
-![Preview](https://raw.githubusercontent.com/changeforan/DotnetWorkoutKit/refs/heads/main/IMG_6B672CFD47B3-1.jpeg)
+```csharp
+// Save as JSON
+File.WriteAllText($"{customWorkout.DisplayName}.workout.json", customWorkout.JsonRepresentation());
+
+// Save as binary
+File.WriteAllBytes($"{customWorkout.DisplayName}.workout", customWorkout.DataRepresentation());
+```
+
+3. Share the `.workout` file to your iPhone through AirDrop or other methods.
+
+4. You can preview the workout on your iPhone and import it to Apple Watch.
+
+<img src="https://raw.githubusercontent.com/changeforan/DotnetWorkoutKit/refs/heads/main/IMG_6B672CFD47B3-2.jpeg" alt="Import" style="zoom:50%;" />
 
 ## License
 

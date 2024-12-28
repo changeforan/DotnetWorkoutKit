@@ -1,14 +1,15 @@
-using static DotnetWorkoutKit.Models.DistanceGoal;
+using System.Text.Json.Serialization;
 
 namespace DotnetWorkoutKit.Models;
 
-public class DistanceGoal(double distance, DistanceUnitType distanceUnitType) : WorkoutGoal
+public class DistanceGoal(double distance, DistanceGoal.DistanceUnit unit) : WorkoutGoal
 {
-    public double Distance { get; } = distance;
+    public double Distance { get; set; } = distance;
 
-    public DistanceUnitType UnitType { get; } = distanceUnitType;
+    public DistanceUnit Unit { get; set; } = unit;
 
-    public enum DistanceUnitType
+    [JsonConverter(typeof(JsonStringEnumConverter<DistanceUnit>))]
+    public enum DistanceUnit
     {
         Meters,
         Kilometers,

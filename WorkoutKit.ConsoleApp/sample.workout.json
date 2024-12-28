@@ -1,0 +1,86 @@
+{
+  "Activity": "Running",
+  "Location": "Outdoor",
+  "DisplayName": "sample",
+  "WarmUp": {
+    "Goal": {
+      "Distance": 3,
+      "Unit": "Kilometers"
+    },
+    "Alert": {
+      "LowerBound": 144,
+      "UpperBound": 153
+    },
+    "DisplayName": "Warm Up"
+  },
+  "Blocks": [
+    {
+      "IntervalSteps": [
+        {
+          "Purpose": "Work",
+          "WorkoutStep": {
+            "Goal": {
+              "Distance": 3,
+              "Unit": "Kilometers"
+            },
+            "Alert": {
+              "MinSpeed": 3.4965034965034967,
+              "MaxSpeed": 3.597122302158273,
+              "Unit": "MetersPerSecond",
+              "Metric": "Current"
+            }
+          }
+        },
+        {
+          "Purpose": "Recovery",
+          "WorkoutStep": {
+            "Goal": {
+              "Time": "00:02:00"
+            }
+          }
+        }
+      ],
+      "Iterations": 2
+    },
+    {
+      "IntervalSteps": [
+        {
+          "Purpose": "Work",
+          "WorkoutStep": {
+            "Goal": {
+              "Distance": 200,
+              "Unit": "Meters"
+            },
+            "Alert": {
+              "MinSpeed": 4.016064257028113,
+              "MaxSpeed": 4.184100418410042,
+              "Unit": "MetersPerSecond",
+              "Metric": "Current"
+            }
+          }
+        },
+        {
+          "Purpose": "Recovery",
+          "WorkoutStep": {
+            "Goal": {
+              "Distance": 200,
+              "Unit": "Meters"
+            }
+          }
+        }
+      ],
+      "Iterations": 6
+    }
+  ],
+  "CoolDown": {
+    "Goal": {
+      "Distance": 3,
+      "Unit": "Kilometers"
+    },
+    "Alert": {
+      "LowerBound": 144,
+      "UpperBound": 153
+    },
+    "DisplayName": "Cool Down"
+  }
+}

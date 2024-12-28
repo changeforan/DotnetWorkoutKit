@@ -1,17 +1,20 @@
+using System.Text.Json.Serialization;
+
 namespace DotnetWorkoutKit.Models;
 
 public class SpeedRangeAlert : WorkoutAlert
 {
     public double MinSpeed { get; }
     public double MaxSpeed { get; }
-    public UnitSpeed SpeedUnit { get; }
+    public SpeedUnit Unit { get; }
     public AlertMetric Metric { get; }
 
-    public SpeedRangeAlert(double minSpeed, double maxSpeed, UnitSpeed speedUnit = UnitSpeed.KilometersPerHour, AlertMetric metric = AlertMetric.Current)
+    [JsonConstructor]
+    public SpeedRangeAlert(double minSpeed, double maxSpeed, SpeedUnit unit = SpeedUnit.KilometersPerHour, AlertMetric metric = AlertMetric.Current)
     {
         MinSpeed = minSpeed;
         MaxSpeed = maxSpeed;
-        SpeedUnit = speedUnit;
+        Unit = unit;
         Metric = metric;
         ValidateSpeeds();
     }
@@ -27,7 +30,7 @@ public class SpeedRangeAlert : WorkoutAlert
     {
         MinSpeed = ConvertPaceToSpeed(minPace);
         MaxSpeed = ConvertPaceToSpeed(maxPace);
-        SpeedUnit = UnitSpeed.MetersPerSecond;
+        Unit = SpeedUnit.MetersPerSecond;
         Metric = metric;
         ValidateSpeeds();
     }
@@ -64,13 +67,15 @@ public class SpeedRangeAlert : WorkoutAlert
         }
     }
 
-    public enum UnitSpeed
+    [JsonConverter(typeof(JsonStringEnumConverter<SpeedUnit>))]
+    public enum SpeedUnit
     {
         MetersPerSecond,
         KilometersPerHour,
         MilesPerHour
     }
 
+    [JsonConverter(typeof(JsonStringEnumConverter<AlertMetric>))]
     public enum AlertMetric
     {
         Current,

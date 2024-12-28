@@ -88,7 +88,7 @@ File.WriteAllBytes($"{customWorkout.DisplayName}.workout", customWorkout.DataRep
 
 4. You can preview the workout on your iPhone and import it to Apple Watch.
 
-<img src="https://raw.githubusercontent.com/changeforan/DotnetWorkoutKit/refs/heads/main/IMG_6B672CFD47B3-1.jpeg" alt="Import" style="zoom:20%;" />
+<img src="https://raw.githubusercontent.com/changeforan/DotnetWorkoutKit/refs/heads/main/IMG_6B672CFD47B3-1.jpeg" alt="Import" width="250" />
 
 ## License
 

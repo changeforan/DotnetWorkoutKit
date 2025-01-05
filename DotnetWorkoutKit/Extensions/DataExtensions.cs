@@ -1,6 +1,5 @@
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using DotnetWorkoutKit.JsonConverters;
 using DotnetWorkoutKit.Protobuf;
 using DotnetWorkoutKit.Protobuf.CustomWorkout;
 using DotnetWorkoutKit.Protobuf.CustomWorkout.Alert;
@@ -60,7 +59,7 @@ public static class DataExtensions
                 Models.CustomWorkout.LocationType.Outdoor => CustomWorkout.Types.LocationType.Outdoor,
                 _ => throw new ArgumentException("Only indoor and outdoor are supported now.")
             },
-            DisplayName = customWorkout.DisplayName
+            DisplayName = customWorkout.DisplayName ?? ""
         };
 
         result.Warmup = ConvertToWorkoutStep(customWorkout.WarmUp);

@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+option csharp_namespace = "DotnetWorkoutKit.Protobuf.CustomWorkout.Alert";
+
+message PowerAlert {
+    PowerRangeAlert power_range_alert = 2;
+
+    message PowerRangeAlert {
+        PowerBound lower_bound = 1;
+        PowerBound upper_bound = 2;
+    }
+
+    message PowerBound {
+        uint32 unit = 1;
+        double power = 2;
+    }
+}

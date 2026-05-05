@@ -15,17 +15,12 @@ public static class DataExtensions
         var workoutBin = new WorkoutBinary
         {
             GUID = Guid.NewGuid().ToString().ToUpper(),
-            CustomWorkout = ConvertToCustomWorkout(customWorkout)
+            CustomWorkout = ConvertToCustomWorkout(customWorkout),
+            Version = 1,
+            Format = 5
         };
 
-        var data = workoutBin.ToByteArray();
-
-        // magic trailer
-        byte[] endBlock = [
-            0xC0, 0x3E, 0x01, 0xD0, 0x3E, 0x05
-        ];
-
-        return [.. data, .. endBlock];
+        return workoutBin.ToByteArray();
     }
 
     public static string JsonRepresentation(this Models.CustomWorkout customWorkout)
@@ -50,17 +45,32 @@ public static class DataExtensions
         {
             ActivityType = customWorkout.Activity switch
             {
+                Models.CustomWorkout.ActivityType.CrossTraining => CustomWorkout.Types.ActivityType.CrossTraining,
+                Models.CustomWorkout.ActivityType.Cycling => CustomWorkout.Types.ActivityType.Cycling,
+                Models.CustomWorkout.ActivityType.Elliptical => CustomWorkout.Types.ActivityType.Elliptical,
+                Models.CustomWorkout.ActivityType.FunctionalStrengthTraining => CustomWorkout.Types.ActivityType.FunctionalStrengthTraining,
+                Models.CustomWorkout.ActivityType.Hiking => CustomWorkout.Types.ActivityType.Hiking,
+                Models.CustomWorkout.ActivityType.Rowing => CustomWorkout.Types.ActivityType.Rowing,
                 Models.CustomWorkout.ActivityType.Running => CustomWorkout.Types.ActivityType.Running,
-                _ => throw new ArgumentException("Only running is supported now.")
+                Models.CustomWorkout.ActivityType.StairClimbing => CustomWorkout.Types.ActivityType.StairClimbing,
+                Models.CustomWorkout.ActivityType.Swimming => CustomWorkout.Types.ActivityType.Swimming,
+                Models.CustomWorkout.ActivityType.TraditionalStrengthTraining => CustomWorkout.Types.ActivityType.TraditionalStrengthTraining,
+                Models.CustomWorkout.ActivityType.Walking => CustomWorkout.Types.ActivityType.Walking,
+                Models.CustomWorkout.ActivityType.Yoga => CustomWorkout.Types.ActivityType.Yoga,
+                Models.CustomWorkout.ActivityType.CoreTraining => CustomWorkout.Types.ActivityType.CoreTraining,
+                Models.CustomWorkout.ActivityType.HighIntensityIntervalTraining => CustomWorkout.Types.ActivityType.HighIntensityIntervalTraining,
+                _ => throw new ArgumentException($"Unsupported activity type: {customWorkout.Activity}")
             },
             LocationType = customWorkout.Location switch
             {
                 Models.CustomWorkout.LocationType.Indoor => CustomWorkout.Types.LocationType.Indoor,
                 Models.CustomWorkout.LocationType.Outdoor => CustomWorkout.Types.LocationType.Outdoor,
-                _ => throw new ArgumentException("Only indoor and outdoor are supported now.")
+                _ => throw new ArgumentException($"Unsupported location type: {customWorkout.Location}")
             },
-            DisplayName = customWorkout.DisplayName ?? ""
         };
+
+        if (customWorkout.DisplayName != null)
+            result.DisplayName = customWorkout.DisplayName;
 
         result.Warmup = ConvertToWorkoutStep(customWorkout.WarmUp);
         result.Cooldown = ConvertToWorkoutStep(customWorkout.CoolDown);
@@ -80,12 +90,16 @@ public static class DataExtensions
             return null;
         }
 
-        return new WorkoutStep
+        var step = new WorkoutStep
         {
             WorkoutGoal = ConvertToWorkoutGoal(workoutStep.Goal),
             WorkoutAlert = ConvertToWorkoutAlert(workoutStep.Alert),
-            DisplayName = workoutStep.DisplayName ?? ""
         };
+
+        if (workoutStep.DisplayName != null)
+            step.DisplayName = workoutStep.DisplayName;
+
+        return step;
     }
 
     private static WorkoutAlert? ConvertToWorkoutAlert(Models.WorkoutAlert? workoutAlert)
@@ -136,10 +150,10 @@ public static class DataExtensions
                                 Unit = SpeedAlert.Types.Speed.Types.SpeedUnitEnum.MetersPerSecond,
                                 Speed_ = CalculateSpeed(speedRangeAlert.MinSpeed, speedRangeAlert.Unit)
                             },
-                            Unknown = new SpeedAlert.Types.Unknown_WrapUInt32_Fixed64
+                            TimeUnit = new SpeedAlert.Types.TimeUnit
                             {
-                                First = 1,
-                                Second = 1
+                                Unit = 1,
+                                Value = 1
                             }
                         },
                         UpperBound = new SpeedAlert.Types.SpeedBound
@@ -149,11 +163,58 @@ public static class DataExtensions
                                 Unit = SpeedAlert.Types.Speed.Types.SpeedUnitEnum.MetersPerSecond,
                                 Speed_ = CalculateSpeed(speedRangeAlert.MaxSpeed, speedRangeAlert.Unit)
                             },
-                            Unknown = new SpeedAlert.Types.Unknown_WrapUInt32_Fixed64
+                            TimeUnit = new SpeedAlert.Types.TimeUnit
                             {
-                                First = 1,
-                                Second = 1
+                                Unit = 1,
+                                Value = 1
                             }
+                        }
+                    }
+                }
+            },
+            Models.CadenceRangeAlert cadenceRangeAlert => new WorkoutAlert
+            {
+                AlertMetric = WorkoutAlert.Types.AlertMetricEnum.Cadence,
+                Unknown = 2,
+                CadenceAlert = new CadenceAlert
+                {
+                    CadenceRangeAlert = new CadenceAlert.Types.CadenceRangeAlert
+                    {
+                        LowerBound = new CadenceAlert.Types.CadenceBound
+                        {
+                            Cadence = (uint)cadenceRangeAlert.MinCadence,
+                            TimeUnit = new CadenceAlert.Types.TimeUnit { Unit = 2, Value = 1 }
+                        },
+                        UpperBound = new CadenceAlert.Types.CadenceBound
+                        {
+                            Cadence = (uint)cadenceRangeAlert.MaxCadence,
+                            TimeUnit = new CadenceAlert.Types.TimeUnit { Unit = 2, Value = 1 }
+                        }
+                    }
+                }
+            },
+            Models.PowerRangeAlert powerRangeAlert => new WorkoutAlert
+            {
+                AlertMetric = powerRangeAlert.Metric switch
+                {
+                    Models.PowerRangeAlert.PowerMetric.Current => WorkoutAlert.Types.AlertMetricEnum.PowerCurrent,
+                    Models.PowerRangeAlert.PowerMetric.Average => WorkoutAlert.Types.AlertMetricEnum.PowerAverage,
+                    _ => throw new ArgumentException("Power metric must be current or average.")
+                },
+                Unknown = 2,
+                PowerAlert = new PowerAlert
+                {
+                    PowerRangeAlert = new PowerAlert.Types.PowerRangeAlert
+                    {
+                        LowerBound = new PowerAlert.Types.PowerBound
+                        {
+                            Unit = 1,
+                            Power = powerRangeAlert.MinPower
+                        },
+                        UpperBound = new PowerAlert.Types.PowerBound
+                        {
+                            Unit = 1,
+                            Power = powerRangeAlert.MaxPower
                         }
                     }
                 }
@@ -167,58 +228,74 @@ public static class DataExtensions
         return speedUnit switch
         {
             Models.SpeedRangeAlert.SpeedUnit.MetersPerSecond => speed,
-            Models.SpeedRangeAlert.SpeedUnit.KilometersPerHour => speed / 3.6,
-            Models.SpeedRangeAlert.SpeedUnit.MilesPerHour => speed / 2.237,
-            _ => throw new ArgumentException("Only meters per second, kilometers per hour, miles per hour, and pace are supported now.")
+            Models.SpeedRangeAlert.SpeedUnit.KilometersPerHour => speed * 0.277778,
+            Models.SpeedRangeAlert.SpeedUnit.MilesPerHour => speed * 0.44704,
+            _ => throw new ArgumentException($"Unsupported speed unit: {speedUnit}")
         };
     }
 
 
     private static WorkoutGoal ConvertToWorkoutGoal(Models.WorkoutGoal workoutGoal)
     {
-        return new WorkoutGoal
+        return workoutGoal switch
         {
-            GoalType = workoutGoal switch
+            Models.OpenGoal => new WorkoutGoal
             {
-                Models.DistanceGoal => GoalType.Distance,
-                Models.TimeGoal => GoalType.Time,
-                _ => throw new ArgumentException("Only distance and time are supported now.")
+                GoalType = GoalType.Open
             },
-            DistanceGoal = workoutGoal switch
+            Models.DistanceGoal distanceGoal => new WorkoutGoal
             {
-                Models.DistanceGoal distanceGoal => new DistanceGoal
+                GoalType = GoalType.Distance,
+                DistanceGoal = new DistanceGoal
                 {
                     UnitType = distanceGoal.Unit switch
                     {
                         Models.DistanceGoal.DistanceUnit.Meters => DistanceGoal.Types.DistanceUnitType.Meters,
                         Models.DistanceGoal.DistanceUnit.Kilometers => DistanceGoal.Types.DistanceUnitType.Kilometers,
+                        Models.DistanceGoal.DistanceUnit.Feet => DistanceGoal.Types.DistanceUnitType.Feet,
+                        Models.DistanceGoal.DistanceUnit.Yards => DistanceGoal.Types.DistanceUnitType.Yards,
+                        Models.DistanceGoal.DistanceUnit.Miles => DistanceGoal.Types.DistanceUnitType.Miles,
                         _ => DistanceGoal.Types.DistanceUnitType.Unspecified
                     },
                     UnitValue = distanceGoal.Distance
-                },
-                _ => null
+                }
             },
-            TimeGoal = workoutGoal switch
+            Models.TimeGoal timeGoal => new WorkoutGoal
             {
-                Models.TimeGoal timeGoal => new TimeGoal
-                {
-                    UnitType = timeGoal.Time switch
-                    {
-                        _ when timeGoal.Time.TotalMinutes > 0 => TimeGoal.Types.TimeUnitType.Minutes,
-                        _ when timeGoal.Time.TotalMinutes < 0 => TimeGoal.Types.TimeUnitType.Seconds,
-                        _ => TimeGoal.Types.TimeUnitType.Unspecified
-                    },
-                    UnitValue = timeGoal.Time switch
-                    {
-                        _ when timeGoal.Time.TotalMinutes > 0 => timeGoal.Time.TotalMinutes,
-                        _ when timeGoal.Time.TotalSeconds < 0 => timeGoal.Time.TotalSeconds,
-                        _ => 0
-                    }
-                },
-                _ => null
-            }
+                GoalType = GoalType.Time,
+                TimeGoal = ConvertTimeGoal(timeGoal)
+            },
+            _ => throw new ArgumentException($"Unsupported goal type: {workoutGoal.GetType().Name}")
         };
     }
+
+    private static TimeGoal ConvertTimeGoal(Models.TimeGoal timeGoal)
+    {
+        if (timeGoal.Time.TotalHours >= 1 && IsWholeNumber(timeGoal.Time.TotalHours))
+        {
+            return new TimeGoal
+            {
+                UnitType = TimeGoal.Types.TimeUnitType.Hours,
+                UnitValue = timeGoal.Time.TotalHours
+            };
+        }
+        if (timeGoal.Time.TotalMinutes >= 1 && IsWholeNumber(timeGoal.Time.TotalMinutes))
+        {
+            return new TimeGoal
+            {
+                UnitType = TimeGoal.Types.TimeUnitType.Minutes,
+                UnitValue = timeGoal.Time.TotalMinutes
+            };
+        }
+        return new TimeGoal
+        {
+            UnitType = TimeGoal.Types.TimeUnitType.Seconds,
+            UnitValue = timeGoal.Time.TotalSeconds
+        };
+    }
+
+    private static bool IsWholeNumber(double value) =>
+        Math.Abs(value - Math.Round(value)) < 1e-9;
 
     private static IntervalBlock ConvertToIntervalBlock(Models.IntervalBlock intervalBlock)
     {

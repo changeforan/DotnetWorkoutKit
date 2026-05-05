@@ -25,18 +25,24 @@ namespace DotnetWorkoutKit.Protobuf.CustomWorkout {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
             "CiFDdXN0b21Xb3Jrb3V0L0N1c3RvbVdvcmtvdXQucHJvdG8aEVdvcmtvdXRT",
-            "dGVwLnByb3RvGhNJbnRlcnZhbEJsb2NrLnByb3RvIq4DCg1DdXN0b21Xb3Jr",
+            "dGVwLnByb3RvGhNJbnRlcnZhbEJsb2NrLnByb3RvIq8FCg1DdXN0b21Xb3Jr",
             "b3V0EjIKDWFjdGl2aXR5X3R5cGUYASABKA4yGy5DdXN0b21Xb3Jrb3V0LkFj",
             "dGl2aXR5VHlwZRIyCg1sb2NhdGlvbl90eXBlGAIgASgOMhsuQ3VzdG9tV29y",
             "a291dC5Mb2NhdGlvblR5cGUSGQoMZGlzcGxheV9uYW1lGAMgASgJSACIAQES",
             "IQoGd2FybXVwGAQgASgLMgwuV29ya291dFN0ZXBIAYgBARInCg9pbnRlcnZh",
             "bF9ibG9ja3MYBSADKAsyDi5JbnRlcnZhbEJsb2NrEiMKCGNvb2xkb3duGAYg",
-            "ASgLMgwuV29ya291dFN0ZXBIAogBASI5CgxBY3Rpdml0eVR5cGUSHAoYVU5T",
-            "UEVDSUZJRURfQWN0aXZpdHlUeXBlEAASCwoHUlVOTklORxAlIkUKDExvY2F0",
-            "aW9uVHlwZRIcChhVTlNQRUNJRklFRF9Mb2NhdGlvblR5cGUQABIKCgZJTkRP",
-            "T1IQAhILCgdPVVRET09SEANCDwoNX2Rpc3BsYXlfbmFtZUIJCgdfd2FybXVw",
-            "QgsKCV9jb29sZG93bkIqqgInRG90bmV0V29ya291dEtpdC5Qcm90b2J1Zi5D",
-            "dXN0b21Xb3Jrb3V0YgZwcm90bzM="));
+            "ASgLMgwuV29ya291dFN0ZXBIAogBASK5AgoMQWN0aXZpdHlUeXBlEhwKGFVO",
+            "U1BFQ0lGSUVEX0FjdGl2aXR5VHlwZRAAEhIKDkNST1NTX1RSQUlOSU5HEAsS",
+            "CwoHQ1lDTElORxANEg4KCkVMTElQVElDQUwQEBIgChxGVU5DVElPTkFMX1NU",
+            "UkVOR1RIX1RSQUlOSU5HEBQSCgoGSElLSU5HEBgSCgoGUk9XSU5HECMSCwoH",
+            "UlVOTklORxAlEhIKDlNUQUlSX0NMSU1CSU5HECwSDAoIU1dJTU1JTkcQLhIh",
+            "Ch1UUkFESVRJT05BTF9TVFJFTkdUSF9UUkFJTklORxAyEgsKB1dBTEtJTkcQ",
+            "NBIICgRZT0dBEDkSEQoNQ09SRV9UUkFJTklORxA7EiQKIEhJR0hfSU5URU5T",
+            "SVRZX0lOVEVSVkFMX1RSQUlOSU5HED8iRQoMTG9jYXRpb25UeXBlEhwKGFVO",
+            "U1BFQ0lGSUVEX0xvY2F0aW9uVHlwZRAAEgoKBklORE9PUhACEgsKB09VVERP",
+            "T1IQA0IPCg1fZGlzcGxheV9uYW1lQgkKB193YXJtdXBCCwoJX2Nvb2xkb3du",
+            "QiqqAidEb3RuZXRXb3Jrb3V0S2l0LlByb3RvYnVmLkN1c3RvbVdvcmtvdXRi",
+            "BnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::DotnetWorkoutKit.Protobuf.CustomWorkout.WorkoutStepReflection.Descriptor, global::DotnetWorkoutKit.Protobuf.CustomWorkout.IntervalBlockReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
@@ -473,11 +479,21 @@ namespace DotnetWorkoutKit.Protobuf.CustomWorkout {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static partial class Types {
       internal enum ActivityType {
-        /// <summary>
-        /// Default value
-        /// </summary>
         [pbr::OriginalName("UNSPECIFIED_ActivityType")] UnspecifiedActivityType = 0,
+        [pbr::OriginalName("CROSS_TRAINING")] CrossTraining = 11,
+        [pbr::OriginalName("CYCLING")] Cycling = 13,
+        [pbr::OriginalName("ELLIPTICAL")] Elliptical = 16,
+        [pbr::OriginalName("FUNCTIONAL_STRENGTH_TRAINING")] FunctionalStrengthTraining = 20,
+        [pbr::OriginalName("HIKING")] Hiking = 24,
+        [pbr::OriginalName("ROWING")] Rowing = 35,
         [pbr::OriginalName("RUNNING")] Running = 37,
+        [pbr::OriginalName("STAIR_CLIMBING")] StairClimbing = 44,
+        [pbr::OriginalName("SWIMMING")] Swimming = 46,
+        [pbr::OriginalName("TRADITIONAL_STRENGTH_TRAINING")] TraditionalStrengthTraining = 50,
+        [pbr::OriginalName("WALKING")] Walking = 52,
+        [pbr::OriginalName("YOGA")] Yoga = 57,
+        [pbr::OriginalName("CORE_TRAINING")] CoreTraining = 59,
+        [pbr::OriginalName("HIGH_INTENSITY_INTERVAL_TRAINING")] HighIntensityIntervalTraining = 63,
       }
 
       internal enum LocationType {

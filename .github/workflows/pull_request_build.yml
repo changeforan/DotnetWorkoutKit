@@ -7,14 +7,25 @@ on:
 
 jobs:
     build:
-        runs-on: ubuntu-latest
+        runs-on: macos-15
         defaults:
           run:
             working-directory: ./test/DotnetWorkoutKitTest
     
         steps:
           - uses: actions/checkout@v4
-    
+
+          - name: Build WorkoutBinaryGenerator (Swift)
+            working-directory: ./tools/WorkoutBinaryGenerator
+            run: xcodebuild -scheme WorkoutBinaryGenerator -configuration Debug build
+
+          - name: Generate Apple WorkoutKit reference binaries
+            working-directory: ./tools/WorkoutBinaryGenerator
+            run: |
+              BUILT_PRODUCTS_DIR=$(xcodebuild -scheme WorkoutBinaryGenerator -configuration Debug -showBuildSettings 2>/dev/null | grep ' BUILT_PRODUCTS_DIR =' | sed 's/.*= //')
+              mkdir -p "$GITHUB_WORKSPACE/test/AppleWorkoutData"
+              "$BUILT_PRODUCTS_DIR/WorkoutBinaryGenerator" "$GITHUB_WORKSPACE/test/AppleWorkoutData"
+
           - name: Setup .NET
             uses: actions/setup-dotnet@v4
             with:
@@ -28,3 +39,5 @@ jobs:
 
           - name: Test
             run: dotnet test --configuration Release --no-build --verbosity normal
+            env:
+              APPLE_WORKOUT_DIR: ${{ github.workspace }}/test/AppleWorkoutData

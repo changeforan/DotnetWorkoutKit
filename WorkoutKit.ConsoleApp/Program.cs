@@ -1,30 +1,35 @@
-﻿using DotnetWorkoutKit.Extensions;
+using DotnetWorkoutKit.Extensions;
 using DotnetWorkoutKit.Models;
 
-var customWorkout = new CustomWorkout(
-        activity: CustomWorkout.ActivityType.Running, 
-        location: CustomWorkout.LocationType.Outdoor,
-        displayName: "sample",
-        warmUp: new WorkoutStep(new DistanceGoal(3, DistanceGoal.DistanceUnit.Kilometers), new HeartRateRangeAlert(144, 153), "Warm Up"),
-        blocks: [
-            new IntervalBlock([
-                new (IntervalStep.PurposeType.Work, new (new DistanceGoal(3, DistanceGoal.DistanceUnit.Kilometers), new SpeedRangeAlert("4'46\"", "4'38\""))),
-                new (IntervalStep.PurposeType.Recovery, new (new TimeGoal(TimeSpan.FromMinutes(2))))
-                ], 2),
-            new IntervalBlock([
-                new (IntervalStep.PurposeType.Work, new (new DistanceGoal(200, DistanceGoal.DistanceUnit.Meters), new SpeedRangeAlert("4'09\"", "3'59\""))),
-                new (IntervalStep.PurposeType.Recovery, new (new DistanceGoal(200, DistanceGoal.DistanceUnit.Meters)))
-                ], 6)
-        ],
-        coolDown: new WorkoutStep(new DistanceGoal(3, DistanceGoal.DistanceUnit.Kilometers), new HeartRateRangeAlert(144, 153), "Cool Down"));
+void Compare(CustomWorkout workout, string name, string appleFile)
+{
+    var bin = workout.DataRepresentation();
+    var appleBin = File.ReadAllBytes($"/Users/change/src/tmp/workoutbin/{appleFile}.workout");
+    var match = bin.Length > 38 && appleBin.Length > 38 &&
+                bin[38..].SequenceEqual(appleBin[38..]);
+    Console.WriteLine($"{name}: dotnet={bin.Length}b apple={appleBin.Length}b match={match}");
+}
 
-// Save as JSON
-File.WriteAllText($"{customWorkout.DisplayName}.workout.json", customWorkout.JsonRepresentation());
+Compare(
+    new CustomWorkout(CustomWorkout.ActivityType.Running, CustomWorkout.LocationType.Outdoor, "spd_ms_cur", null,
+        [new IntervalBlock([
+            new(IntervalStep.PurposeType.Work, new(new DistanceGoal(1, DistanceGoal.DistanceUnit.Kilometers),
+                new SpeedRangeAlert(3.5, 4.5, SpeedRangeAlert.SpeedUnit.MetersPerSecond, SpeedRangeAlert.AlertMetric.Current)))
+        ], 1)], null),
+    "spd_ms_cur", "spd_01_ms_current");
 
-// Save as binary
-File.WriteAllBytes($"{customWorkout.DisplayName}.workout", customWorkout.DataRepresentation());
+Compare(
+    new CustomWorkout(CustomWorkout.ActivityType.Running, CustomWorkout.LocationType.Outdoor, "spd_ms_avg", null,
+        [new IntervalBlock([
+            new(IntervalStep.PurposeType.Work, new(new DistanceGoal(1, DistanceGoal.DistanceUnit.Kilometers),
+                new SpeedRangeAlert(3.5, 4.5, SpeedRangeAlert.SpeedUnit.MetersPerSecond, SpeedRangeAlert.AlertMetric.Average)))
+        ], 1)], null),
+    "spd_ms_avg", "spd_02_ms_average");
 
-// Load from JSON
-var _ = File.ReadAllText($"{customWorkout.DisplayName}.workout.json").LoadFromJson();
-
-Console.WriteLine("Sample workout created and saved as JSON and binary files.");
+Compare(
+    new CustomWorkout(CustomWorkout.ActivityType.Running, CustomWorkout.LocationType.Outdoor, "cadence_ref", null,
+        [new IntervalBlock([
+            new(IntervalStep.PurposeType.Work, new(new DistanceGoal(1, DistanceGoal.DistanceUnit.Kilometers),
+                new CadenceRangeAlert(170, 185)))
+        ], 1)], null),
+    "cadence_ref", "spd_07_cadence_ref");

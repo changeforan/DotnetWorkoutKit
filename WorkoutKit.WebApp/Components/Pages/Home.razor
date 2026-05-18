@@ -1,0 +1,149 @@
+@page "/"
+@rendermode InteractiveServer
+@using DotnetWorkoutKit.Extensions
+@using DotnetWorkoutKit.Models
+@using WorkoutKit.WebApp.Components.Builder
+@using WorkoutKit.WebApp.Models
+@inject IJSRuntime JS
+
+<PageTitle>Workout Builder</PageTitle>
+
+<div class="app-shell">
+    <header class="app-header">
+        <div class="brand">
+            <span class="brand-mark">●</span>
+            <h1>Workout Builder</h1>
+        </div>
+        <p class="tagline">Design Apple Watch custom workouts and download as JSON or .workout</p>
+    </header>
+
+    <main class="builder">
+        <section class="card">
+            <h2 class="section-title">Workout</h2>
+            <div class="grid">
+                <label class="field">
+                    <span class="field-label">Name</span>
+                    <input class="control" type="text" placeholder="My Workout" @bind="Workout.DisplayName" />
+                </label>
+                <label class="field">
+                    <span class="field-label">Activity</span>
+                    <select class="control" @bind="Workout.Activity">
+                        @foreach (var a in Enum.GetValues<CustomWorkout.ActivityType>())
+                        {
+                            <option value="@a">@a</option>
+                        }
+                    </select>
+                </label>
+                <label class="field">
+                    <span class="field-label">Location</span>
+                    <select class="control" @bind="Workout.Location">
+                        @foreach (var l in Enum.GetValues<CustomWorkout.LocationType>())
+                        {
+                            <option value="@l">@l</option>
+                        }
+                    </select>
+                </label>
+            </div>
+        </section>
+
+        <section class="card">
+            <div class="section-row">
+                <h2 class="section-title">Warm Up</h2>
+                <label class="toggle">
+                    <input type="checkbox" @bind="Workout.HasWarmUp" />
+                    <span>Enabled</span>
+                </label>
+            </div>
+            @if (Workout.HasWarmUp)
+            {
+                <StepEditor Step="Workout.WarmUp" />
+            }
+        </section>
+
+        <section class="card">
+            <h2 class="section-title">Interval Blocks</h2>
+            <div class="block-list">
+                @for (var i = 0; i < Workout.Blocks.Count; i++)
+                {
+                    var idx = i;
+                    <BlockEditor Block="Workout.Blocks[idx]" Index="idx"
+                                 OnRemove="@(Workout.Blocks.Count > 1 ? EventCallback.Factory.Create(this, () => Workout.Blocks.RemoveAt(idx)) : default)" />
+                }
+            </div>
+            <button class="btn btn-primary" @onclick="AddBlock">+ Add Block</button>
+        </section>
+
+        <section class="card">
+            <div class="section-row">
+                <h2 class="section-title">Cool Down</h2>
+                <label class="toggle">
+                    <input type="checkbox" @bind="Workout.HasCoolDown" />
+                    <span>Enabled</span>
+                </label>
+            </div>
+            @if (Workout.HasCoolDown)
+            {
+                <StepEditor Step="Workout.CoolDown" />
+            }
+        </section>
+
+        @if (!string.IsNullOrEmpty(ErrorMessage))
+        {
+            <div class="alert-banner error">@ErrorMessage</div>
+        }
+
+        <section class="actions">
+            <button class="btn btn-primary btn-lg" @onclick="DownloadWorkout">Download .workout</button>
+            <button class="btn btn-secondary btn-lg" @onclick="DownloadJson">Download .json</button>
+        </section>
+    </main>
+
+    <footer class="app-footer">DotnetWorkoutKit</footer>
+</div>
+
+@code {
+    WorkoutModel Workout { get; set; } = new();
+    string? ErrorMessage;
+
+    void AddBlock() => Workout.Blocks.Add(new BlockModel());
+
+    string SafeFileName()
+    {
+        var name = string.IsNullOrWhiteSpace(Workout.DisplayName) ? "workout" : Workout.DisplayName!;
+        foreach (var c in Path.GetInvalidFileNameChars()) name = name.Replace(c, '_');
+        return name;
+    }
+
+    async Task DownloadWorkout()
+    {
+        ErrorMessage = null;
+        try
+        {
+            var w = Workout.ToCustomWorkout();
+            var bytes = w.DataRepresentation();
+            await JS.InvokeVoidAsync("workoutDownload.save",
+                $"{SafeFileName()}.workout", "application/octet-stream", Convert.ToBase64String(bytes));
+        }
+        catch (Exception ex)
+        {
+            ErrorMessage = ex.Message;
+        }
+    }
+
+    async Task DownloadJson()
+    {
+        ErrorMessage = null;
+        try
+        {
+            var w = Workout.ToCustomWorkout();
+            var json = w.JsonRepresentation();
+            var bytes = System.Text.Encoding.UTF8.GetBytes(json);
+            await JS.InvokeVoidAsync("workoutDownload.save",
+                $"{SafeFileName()}.json", "application/json", Convert.ToBase64String(bytes));
+        }
+        catch (Exception ex)
+        {
+            ErrorMessage = ex.Message;
+        }
+    }
+}

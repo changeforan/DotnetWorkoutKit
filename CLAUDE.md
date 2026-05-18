@@ -13,6 +13,9 @@ dotnet build DotnetWorkoutKit
 # Run unit tests
 dotnet test test/DotnetWorkoutKitTest
 
+# Run the Blazor Web UI for building workouts
+dotnet run --project WorkoutKit.WebApp
+
 # Run tests with Apple binary comparison (macOS only)
 # 1. Build the Swift reference tool:
 xcodebuild -project tools/WorkoutBinaryGenerator/WorkoutBinaryGenerator.xcodeproj -scheme WorkoutBinaryGenerator -configuration Debug build
@@ -36,6 +39,12 @@ The `.workout` file is a Protocol Buffers binary. The proto definitions are in `
 - `DotnetWorkoutKit/protobuf/` - Proto definitions and auto-generated C# code
 - `DotnetWorkoutKit/JsonConverters/` - Custom JSON converters for polymorphic types (WorkoutAlert, WorkoutGoal)
 - `WorkoutKit.ConsoleApp/` - CLI for local testing (`generate`, `tojson`, `compare` subcommands that operate on file paths)
+- `WorkoutKit.WebApp/` - Blazor Server (.NET 8) interactive UI for building a `CustomWorkout` and downloading it as `.workout` or `.json`. Key files:
+  - `Components/Pages/Home.razor` - main workout builder page (`@page "/"`, `InteractiveServer` render mode)
+  - `Components/Builder/` - sub-editors: `BlockEditor`, `StepEditor`, `GoalEditor`, `AlertEditor`
+  - `Models/WorkoutBuilderModels.cs` - mutable view models (`WorkoutModel`, `BlockModel`, `IntervalStepModel`, `StepModel`, `GoalModel`, `AlertModel`) that convert to the immutable `DotnetWorkoutKit.Models` types
+  - `wwwroot/app.css` - dark theme styling (cards, color-coded work/recovery steps)
+  - `wwwroot/download.js` - browser file download helper called via JS interop (base64 -> Blob -> `<a download>`)
 - `test/DotnetWorkoutKitTest/` - xUnit v3 tests
 - `tools/WorkoutBinaryGenerator/` - Swift/Xcode tool that generates reference `.workout` files using Apple's real WorkoutKit framework
 

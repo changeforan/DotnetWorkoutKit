@@ -1,0 +1,50 @@
+@using DotnetWorkoutKit.Models
+@using WorkoutKit.WebApp.Models
+
+<div class="goal-editor">
+    <label class="field">
+        <span class="field-label">Goal</span>
+        <select class="control" @bind="Goal.Kind">
+            @foreach (var k in Enum.GetValues<GoalKind>())
+            {
+                <option value="@k">@k</option>
+            }
+        </select>
+    </label>
+
+    @if (Goal.Kind == GoalKind.Time)
+    {
+        <div class="inline-fields">
+            <label class="field">
+                <span class="field-label">Minutes</span>
+                <input class="control" type="number" min="0" @bind="Goal.TimeMinutes" />
+            </label>
+            <label class="field">
+                <span class="field-label">Seconds</span>
+                <input class="control" type="number" min="0" max="59" @bind="Goal.TimeSeconds" />
+            </label>
+        </div>
+    }
+    else if (Goal.Kind == GoalKind.Distance)
+    {
+        <div class="inline-fields">
+            <label class="field">
+                <span class="field-label">Distance</span>
+                <input class="control" type="number" step="0.01" min="0" @bind="Goal.Distance" />
+            </label>
+            <label class="field">
+                <span class="field-label">Unit</span>
+                <select class="control" @bind="Goal.DistanceUnit">
+                    @foreach (var u in Enum.GetValues<DistanceGoal.DistanceUnit>())
+                    {
+                        <option value="@u">@u</option>
+                    }
+                </select>
+            </label>
+        </div>
+    }
+</div>
+
+@code {
+    [Parameter, EditorRequired] public GoalModel Goal { get; set; } = default!;
+}

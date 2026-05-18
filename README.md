@@ -103,6 +103,13 @@ var customWorkout = json.LoadFromJson();
 > # Byte-compare two .workout binaries (skipping the per-serialization UUID)
 > dotnet run --project WorkoutKit.ConsoleApp -- compare a.workout b.workout
 > ```
+>
+> The `WorkoutKit.WebApp` project provides an interactive Blazor Server UI for
+> designing workouts in the browser and downloading them as `.workout` or `.json`:
+>
+> ```bash
+> dotnet run --project WorkoutKit.WebApp
+> ```
 
 2. Save the `CustomWorkout` as a `.workout` file or a JSON file.
 
@@ -133,6 +140,7 @@ DotnetWorkoutKit/
 │   │   └── Models/             # Auto-generated C# from .proto files
 │   └── JsonConverters/         # Custom JSON serializers
 ├── WorkoutKit.ConsoleApp/      # Console app for local testing
+├── WorkoutKit.WebApp/          # Blazor Server UI for building & downloading workouts
 ├── test/DotnetWorkoutKitTest/  # Unit tests (xUnit v3)
 └── tools/WorkoutBinaryGenerator/  # Swift tool to generate Apple reference binaries
 ```

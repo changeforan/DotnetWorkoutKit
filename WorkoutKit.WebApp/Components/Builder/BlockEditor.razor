@@ -1,0 +1,54 @@
+@using DotnetWorkoutKit.Models
+@using WorkoutKit.WebApp.Models
+
+<div class="block-card">
+    <div class="block-header">
+        <h3 class="block-title">Block @(Index + 1)</h3>
+        <label class="field iterations-field">
+            <span class="field-label">Iterations</span>
+            <input class="control" type="number" min="1" @bind="Block.Iterations" />
+        </label>
+        @if (OnRemove.HasDelegate)
+        {
+            <button class="btn btn-danger" @onclick="() => OnRemove.InvokeAsync()">Remove Block</button>
+        }
+    </div>
+
+    <div class="step-list">
+        @for (var i = 0; i < Block.Steps.Count; i++)
+        {
+            var idx = i;
+            var item = Block.Steps[idx];
+            <div class="step-card @(item.Purpose == IntervalStep.PurposeType.Work ? "work" : "recovery")">
+                <div class="step-header">
+                    <label class="field">
+                        <span class="field-label">Purpose</span>
+                        <select class="control" @bind="item.Purpose">
+                            @foreach (var p in Enum.GetValues<IntervalStep.PurposeType>())
+                            {
+                                <option value="@p">@p</option>
+                            }
+                        </select>
+                    </label>
+                    <span class="step-index">Step @(idx + 1)</span>
+                    <button class="btn btn-ghost" disabled="@(Block.Steps.Count <= 1)"
+                            @onclick="() => Block.Steps.RemoveAt(idx)">Remove</button>
+                </div>
+                <StepEditor Step="item.Step" />
+            </div>
+        }
+    </div>
+
+    <button class="btn btn-secondary" @onclick="AddStep">+ Add Interval Step</button>
+</div>
+
+@code {
+    [Parameter, EditorRequired] public BlockModel Block { get; set; } = default!;
+    [Parameter] public int Index { get; set; }
+    [Parameter] public EventCallback OnRemove { get; set; }
+
+    void AddStep() => Block.Steps.Add(new IntervalStepModel
+    {
+        Purpose = Block.Steps.Count % 2 == 0 ? IntervalStep.PurposeType.Work : IntervalStep.PurposeType.Recovery
+    });
+}

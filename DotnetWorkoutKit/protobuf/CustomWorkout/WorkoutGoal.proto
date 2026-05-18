@@ -27,11 +27,14 @@ message WorkoutGoal {
 
     message DistanceGoal {
         enum DistanceUnitType {
-            UNSPECIFIED = 0;  // Default value
+            UNSPECIFIED = 0;
             METERS = 1;
             KILOMETERS = 2;
+            FEET = 3;
+            YARDS = 4;
+            MILES = 5;
         }
-        DistanceUnitType unit_type = 1;  // DistanceUnitType
-        double unit_value = 2;  // Distance in units
+        DistanceUnitType unit_type = 1;
+        double unit_value = 2;
     }
 }

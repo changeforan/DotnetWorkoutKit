@@ -25,13 +25,14 @@ namespace DotnetWorkoutKit.Protobuf {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
             "ChFXb3Jrb3V0RmlsZS5wcm90bxohQ3VzdG9tV29ya291dC9DdXN0b21Xb3Jr",
-            "b3V0LnByb3RvIkUKDVdvcmtvdXRCaW5hcnkSDAoER1VJRBgJIAEoCRImCg5j",
-            "dXN0b21fd29ya291dBgLIAEoCzIOLkN1c3RvbVdvcmtvdXRCHKoCGURvdG5l",
-            "dFdvcmtvdXRLaXQuUHJvdG9idWZiBnByb3RvMw=="));
+            "b3V0LnByb3RvImgKDVdvcmtvdXRCaW5hcnkSDAoER1VJRBgJIAEoCRImCg5j",
+            "dXN0b21fd29ya291dBgLIAEoCzIOLkN1c3RvbVdvcmtvdXQSEAoHdmVyc2lv",
+            "bhjoByABKA0SDwoGZm9ybWF0GOoHIAEoDUIcqgIZRG90bmV0V29ya291dEtp",
+            "dC5Qcm90b2J1ZmIGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::DotnetWorkoutKit.Protobuf.CustomWorkout.CustomWorkoutReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::DotnetWorkoutKit.Protobuf.WorkoutBinary), global::DotnetWorkoutKit.Protobuf.WorkoutBinary.Parser, new[]{ "GUID", "CustomWorkout" }, null, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::DotnetWorkoutKit.Protobuf.WorkoutBinary), global::DotnetWorkoutKit.Protobuf.WorkoutBinary.Parser, new[]{ "GUID", "CustomWorkout", "Version", "Format" }, null, null, null, null)
           }));
     }
     #endregion
@@ -75,6 +76,8 @@ namespace DotnetWorkoutKit.Protobuf {
     public WorkoutBinary(WorkoutBinary other) : this() {
       gUID_ = other.gUID_;
       customWorkout_ = other.customWorkout_ != null ? other.customWorkout_.Clone() : null;
+      version_ = other.version_;
+      format_ = other.format_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -108,6 +111,30 @@ namespace DotnetWorkoutKit.Protobuf {
       }
     }
 
+    /// <summary>Field number for the "version" field.</summary>
+    public const int VersionFieldNumber = 1000;
+    private uint version_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public uint Version {
+      get { return version_; }
+      set {
+        version_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "format" field.</summary>
+    public const int FormatFieldNumber = 1002;
+    private uint format_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public uint Format {
+      get { return format_; }
+      set {
+        format_ = value;
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
@@ -125,6 +152,8 @@ namespace DotnetWorkoutKit.Protobuf {
       }
       if (GUID != other.GUID) return false;
       if (!object.Equals(CustomWorkout, other.CustomWorkout)) return false;
+      if (Version != other.Version) return false;
+      if (Format != other.Format) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -134,6 +163,8 @@ namespace DotnetWorkoutKit.Protobuf {
       int hash = 1;
       if (GUID.Length != 0) hash ^= GUID.GetHashCode();
       if (customWorkout_ != null) hash ^= CustomWorkout.GetHashCode();
+      if (Version != 0) hash ^= Version.GetHashCode();
+      if (Format != 0) hash ^= Format.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -160,6 +191,14 @@ namespace DotnetWorkoutKit.Protobuf {
         output.WriteRawTag(90);
         output.WriteMessage(CustomWorkout);
       }
+      if (Version != 0) {
+        output.WriteRawTag(192, 62);
+        output.WriteUInt32(Version);
+      }
+      if (Format != 0) {
+        output.WriteRawTag(208, 62);
+        output.WriteUInt32(Format);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -178,6 +217,14 @@ namespace DotnetWorkoutKit.Protobuf {
         output.WriteRawTag(90);
         output.WriteMessage(CustomWorkout);
       }
+      if (Version != 0) {
+        output.WriteRawTag(192, 62);
+        output.WriteUInt32(Version);
+      }
+      if (Format != 0) {
+        output.WriteRawTag(208, 62);
+        output.WriteUInt32(Format);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -193,6 +240,12 @@ namespace DotnetWorkoutKit.Protobuf {
       }
       if (customWorkout_ != null) {
         size += 1 + pb::CodedOutputStream.ComputeMessageSize(CustomWorkout);
+      }
+      if (Version != 0) {
+        size += 2 + pb::CodedOutputStream.ComputeUInt32Size(Version);
+      }
+      if (Format != 0) {
+        size += 2 + pb::CodedOutputStream.ComputeUInt32Size(Format);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -214,6 +267,12 @@ namespace DotnetWorkoutKit.Protobuf {
           CustomWorkout = new global::DotnetWorkoutKit.Protobuf.CustomWorkout.CustomWorkout();
         }
         CustomWorkout.MergeFrom(other.CustomWorkout);
+      }
+      if (other.Version != 0) {
+        Version = other.Version;
+      }
+      if (other.Format != 0) {
+        Format = other.Format;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -245,6 +304,14 @@ namespace DotnetWorkoutKit.Protobuf {
             input.ReadMessage(CustomWorkout);
             break;
           }
+          case 8000: {
+            Version = input.ReadUInt32();
+            break;
+          }
+          case 8016: {
+            Format = input.ReadUInt32();
+            break;
+          }
         }
       }
     #endif
@@ -273,6 +340,14 @@ namespace DotnetWorkoutKit.Protobuf {
               CustomWorkout = new global::DotnetWorkoutKit.Protobuf.CustomWorkout.CustomWorkout();
             }
             input.ReadMessage(CustomWorkout);
+            break;
+          }
+          case 8000: {
+            Version = input.ReadUInt32();
+            break;
+          }
+          case 8016: {
+            Format = input.ReadUInt32();
             break;
           }
         }

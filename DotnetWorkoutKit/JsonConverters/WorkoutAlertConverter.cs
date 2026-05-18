@@ -11,8 +11,14 @@ public class WorkoutAlertConverter : JsonConverter<WorkoutAlert>
         using JsonDocument document = JsonDocument.ParseValue(ref reader);
         var root = document.RootElement;
 
-        if (root.TryGetProperty("LowerBound", out _))
+        if (root.TryGetProperty("LowerBound", out _) && root.TryGetProperty("UpperBound", out _) &&
+            !root.TryGetProperty("MinSpeed", out _) && !root.TryGetProperty("Unit", out _))
         {
+            if (root.TryGetProperty("Metric", out _))
+            {
+                return JsonSerializer.Deserialize<PowerRangeAlert>(root.GetRawText(), options)
+                    ?? throw new JsonException("Failed to deserialize PowerRangeAlert.");
+            }
             return JsonSerializer.Deserialize<HeartRateRangeAlert>(root.GetRawText(), options)
                 ?? throw new JsonException("Failed to deserialize HeartRateRangeAlert.");
         }
@@ -22,11 +28,18 @@ public class WorkoutAlertConverter : JsonConverter<WorkoutAlert>
             {
                 return ManualDeserializeSpeedRangeAlert(root);
             }
-            else
-            {
-                return JsonSerializer.Deserialize<SpeedRangeAlert>(root.GetRawText(), options)
-                    ?? throw new JsonException("Failed to deserialize SpeedRangeAlert.");
-            }
+            return JsonSerializer.Deserialize<SpeedRangeAlert>(root.GetRawText(), options)
+                ?? throw new JsonException("Failed to deserialize SpeedRangeAlert.");
+        }
+        else if (root.TryGetProperty("MinCadence", out _))
+        {
+            return JsonSerializer.Deserialize<CadenceRangeAlert>(root.GetRawText(), options)
+                ?? throw new JsonException("Failed to deserialize CadenceRangeAlert.");
+        }
+        else if (root.TryGetProperty("MinPower", out _))
+        {
+            return JsonSerializer.Deserialize<PowerRangeAlert>(root.GetRawText(), options)
+                ?? throw new JsonException("Failed to deserialize PowerRangeAlert.");
         }
         else
         {
@@ -36,17 +49,22 @@ public class WorkoutAlertConverter : JsonConverter<WorkoutAlert>
 
     public override void Write(Utf8JsonWriter writer, WorkoutAlert value, JsonSerializerOptions options)
     {
-        if (value is HeartRateRangeAlert heartRateRangeAlert)
+        switch (value)
         {
-            JsonSerializer.Serialize(writer, heartRateRangeAlert, options);
-        }
-        else if (value is SpeedRangeAlert speedRangeAlert)
-        {
-            JsonSerializer.Serialize(writer, speedRangeAlert, options);
-        }
-        else
-        {
-            throw new JsonException("Unknown WorkoutAlert type.");
+            case HeartRateRangeAlert heartRateRangeAlert:
+                JsonSerializer.Serialize(writer, heartRateRangeAlert, options);
+                break;
+            case SpeedRangeAlert speedRangeAlert:
+                JsonSerializer.Serialize(writer, speedRangeAlert, options);
+                break;
+            case CadenceRangeAlert cadenceRangeAlert:
+                JsonSerializer.Serialize(writer, cadenceRangeAlert, options);
+                break;
+            case PowerRangeAlert powerRangeAlert:
+                JsonSerializer.Serialize(writer, powerRangeAlert, options);
+                break;
+            default:
+                throw new JsonException("Unknown WorkoutAlert type.");
         }
     }
 

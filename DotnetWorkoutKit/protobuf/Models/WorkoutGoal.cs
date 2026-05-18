@@ -24,20 +24,21 @@ namespace DotnetWorkoutKit.Protobuf.CustomWorkout {
     static WorkoutGoalReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "Ch9DdXN0b21Xb3Jrb3V0L1dvcmtvdXRHb2FsLnByb3RvIpUECgtXb3Jrb3V0",
+            "Ch9DdXN0b21Xb3Jrb3V0L1dvcmtvdXRHb2FsLnByb3RvIrUECgtXb3Jrb3V0",
             "R29hbBIoCglnb2FsX3R5cGUYASABKA4yFS5Xb3Jrb3V0R29hbC5Hb2FsVHlw",
             "ZRIoCgl0aW1lX2dvYWwYAiABKAsyFS5Xb3Jrb3V0R29hbC5UaW1lR29hbBIw",
             "Cg1kaXN0YW5jZV9nb2FsGAQgASgLMhkuV29ya291dEdvYWwuRGlzdGFuY2VH",
             "b2FsGpsBCghUaW1lR29hbBI1Cgl1bml0X3R5cGUYASABKA4yIi5Xb3Jrb3V0",
             "R29hbC5UaW1lR29hbC5UaW1lVW5pdFR5cGUSEgoKdW5pdF92YWx1ZRgCIAEo",
             "ASJECgxUaW1lVW5pdFR5cGUSDwoLVU5TUEVDSUZJRUQQABILCgdTRUNPTkRT",
-            "EAESCwoHTUlOVVRFUxACEgkKBUhPVVJTEAMaogEKDERpc3RhbmNlR29hbBI9",
+            "EAESCwoHTUlOVVRFUxACEgkKBUhPVVJTEAMawgEKDERpc3RhbmNlR29hbBI9",
             "Cgl1bml0X3R5cGUYASABKA4yKi5Xb3Jrb3V0R29hbC5EaXN0YW5jZUdvYWwu",
-            "RGlzdGFuY2VVbml0VHlwZRISCgp1bml0X3ZhbHVlGAIgASgBIj8KEERpc3Rh",
+            "RGlzdGFuY2VVbml0VHlwZRISCgp1bml0X3ZhbHVlGAIgASgBIl8KEERpc3Rh",
             "bmNlVW5pdFR5cGUSDwoLVU5TUEVDSUZJRUQQABIKCgZNRVRFUlMQARIOCgpL",
-            "SUxPTUVURVJTEAIiPQoIR29hbFR5cGUSDwoLVU5TUEVDSUZJRUQQABIICgRU",
-            "SU1FEAESDAoIRElTVEFOQ0UQAxIICgRPUEVOEARCKqoCJ0RvdG5ldFdvcmtv",
-            "dXRLaXQuUHJvdG9idWYuQ3VzdG9tV29ya291dGIGcHJvdG8z"));
+            "SUxPTUVURVJTEAISCAoERkVFVBADEgkKBVlBUkRTEAQSCQoFTUlMRVMQBSI9",
+            "CghHb2FsVHlwZRIPCgtVTlNQRUNJRklFRBAAEggKBFRJTUUQARIMCghESVNU",
+            "QU5DRRADEggKBE9QRU4QBEIqqgInRG90bmV0V29ya291dEtpdC5Qcm90b2J1",
+            "Zi5DdXN0b21Xb3Jrb3V0YgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
@@ -669,9 +670,6 @@ namespace DotnetWorkoutKit.Protobuf.CustomWorkout {
         /// <summary>Field number for the "unit_type" field.</summary>
         public const int UnitTypeFieldNumber = 1;
         private global::DotnetWorkoutKit.Protobuf.CustomWorkout.WorkoutGoal.Types.DistanceGoal.Types.DistanceUnitType unitType_ = global::DotnetWorkoutKit.Protobuf.CustomWorkout.WorkoutGoal.Types.DistanceGoal.Types.DistanceUnitType.Unspecified;
-        /// <summary>
-        /// DistanceUnitType
-        /// </summary>
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
         public global::DotnetWorkoutKit.Protobuf.CustomWorkout.WorkoutGoal.Types.DistanceGoal.Types.DistanceUnitType UnitType {
@@ -684,9 +682,6 @@ namespace DotnetWorkoutKit.Protobuf.CustomWorkout {
         /// <summary>Field number for the "unit_value" field.</summary>
         public const int UnitValueFieldNumber = 2;
         private double unitValue_;
-        /// <summary>
-        /// Distance in units
-        /// </summary>
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
         public double UnitValue {
@@ -865,12 +860,12 @@ namespace DotnetWorkoutKit.Protobuf.CustomWorkout {
         [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
         public static partial class Types {
           internal enum DistanceUnitType {
-            /// <summary>
-            /// Default value
-            /// </summary>
             [pbr::OriginalName("UNSPECIFIED")] Unspecified = 0,
             [pbr::OriginalName("METERS")] Meters = 1,
             [pbr::OriginalName("KILOMETERS")] Kilometers = 2,
+            [pbr::OriginalName("FEET")] Feet = 3,
+            [pbr::OriginalName("YARDS")] Yards = 4,
+            [pbr::OriginalName("MILES")] Miles = 5,
           }
 
         }

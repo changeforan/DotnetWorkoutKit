@@ -13,6 +13,8 @@ public class DistanceGoal(double distance, DistanceGoal.DistanceUnit unit) : Wor
     {
         Meters,
         Kilometers,
+        Feet,
+        Yards,
         Miles
     }
 }

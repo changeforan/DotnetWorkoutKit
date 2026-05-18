@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+option csharp_namespace = "DotnetWorkoutKit.Protobuf.CustomWorkout.Alert";
+
+message CadenceAlert {
+    CadenceRangeAlert cadence_range_alert = 2;
+
+    message CadenceRangeAlert {
+        CadenceBound lower_bound = 1;
+        CadenceBound upper_bound = 2;
+    }
+
+    message CadenceBound {
+        uint32 cadence = 1;
+        TimeUnit time_unit = 2;
+    }
+
+    message TimeUnit {
+        uint32 unit = 1;
+        double value = 2;
+    }
+}

@@ -4,17 +4,24 @@ option csharp_namespace = "DotnetWorkoutKit.Protobuf.CustomWorkout.Alert";
 
 import "SpeedAlert.proto";
 import "HeartRateRangeAlert.proto";
+import "CadenceAlert.proto";
+import "PowerAlert.proto";
 
 message WorkoutAlert {
     enum AlertMetricEnum {
-        UNSPECIFIED = 0;  // Default value
+        UNSPECIFIED = 0;
         AVERAGE = 1;
         CURRENT = 2;
+        CADENCE = 3;
+        POWER_CURRENT = 4;
         COUNT_PER_MINUTE = 5;
+        POWER_AVERAGE = 6;
     }
 
     AlertMetricEnum alert_metric = 1;
-    uint32 unknown = 2;  // Unknown, 2 = range type
+    uint32 unknown = 2;
     SpeedAlert speed_alert = 4;
+    CadenceAlert cadence_alert = 5;
+    PowerAlert power_alert = 6;
     HeartRateRangeAlert heart_rate_range_alert = 7;
 }

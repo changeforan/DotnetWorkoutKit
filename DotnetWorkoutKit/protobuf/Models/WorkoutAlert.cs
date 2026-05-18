@@ -25,18 +25,22 @@ namespace DotnetWorkoutKit.Protobuf.CustomWorkout.Alert {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
             "CiZDdXN0b21Xb3Jrb3V0L0FsZXJ0L1dvcmtvdXRBbGVydC5wcm90bxoQU3Bl",
-            "ZWRBbGVydC5wcm90bxoZSGVhcnRSYXRlUmFuZ2VBbGVydC5wcm90byKAAgoM",
-            "V29ya291dEFsZXJ0EjMKDGFsZXJ0X21ldHJpYxgBIAEoDjIdLldvcmtvdXRB",
-            "bGVydC5BbGVydE1ldHJpY0VudW0SDwoHdW5rbm93bhgCIAEoDRIgCgtzcGVl",
-            "ZF9hbGVydBgEIAEoCzILLlNwZWVkQWxlcnQSNAoWaGVhcnRfcmF0ZV9yYW5n",
-            "ZV9hbGVydBgHIAEoCzIULkhlYXJ0UmF0ZVJhbmdlQWxlcnQiUgoPQWxlcnRN",
-            "ZXRyaWNFbnVtEg8KC1VOU1BFQ0lGSUVEEAASCwoHQVZFUkFHRRABEgsKB0NV",
-            "UlJFTlQQAhIUChBDT1VOVF9QRVJfTUlOVVRFEAVCMKoCLURvdG5ldFdvcmtv",
-            "dXRLaXQuUHJvdG9idWYuQ3VzdG9tV29ya291dC5BbGVydGIGcHJvdG8z"));
+            "ZWRBbGVydC5wcm90bxoZSGVhcnRSYXRlUmFuZ2VBbGVydC5wcm90bxoSQ2Fk",
+            "ZW5jZUFsZXJ0LnByb3RvGhBQb3dlckFsZXJ0LnByb3RvIvwCCgxXb3Jrb3V0",
+            "QWxlcnQSMwoMYWxlcnRfbWV0cmljGAEgASgOMh0uV29ya291dEFsZXJ0LkFs",
+            "ZXJ0TWV0cmljRW51bRIPCgd1bmtub3duGAIgASgNEiAKC3NwZWVkX2FsZXJ0",
+            "GAQgASgLMgsuU3BlZWRBbGVydBIkCg1jYWRlbmNlX2FsZXJ0GAUgASgLMg0u",
+            "Q2FkZW5jZUFsZXJ0EiAKC3Bvd2VyX2FsZXJ0GAYgASgLMgsuUG93ZXJBbGVy",
+            "dBI0ChZoZWFydF9yYXRlX3JhbmdlX2FsZXJ0GAcgASgLMhQuSGVhcnRSYXRl",
+            "UmFuZ2VBbGVydCKFAQoPQWxlcnRNZXRyaWNFbnVtEg8KC1VOU1BFQ0lGSUVE",
+            "EAASCwoHQVZFUkFHRRABEgsKB0NVUlJFTlQQAhILCgdDQURFTkNFEAMSEQoN",
+            "UE9XRVJfQ1VSUkVOVBAEEhQKEENPVU5UX1BFUl9NSU5VVEUQBRIRCg1QT1dF",
+            "Ul9BVkVSQUdFEAZCMKoCLURvdG5ldFdvcmtvdXRLaXQuUHJvdG9idWYuQ3Vz",
+            "dG9tV29ya291dC5BbGVydGIGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
-          new pbr::FileDescriptor[] { global::DotnetWorkoutKit.Protobuf.CustomWorkout.Alert.SpeedAlertReflection.Descriptor, global::DotnetWorkoutKit.Protobuf.CustomWorkout.Alert.HeartRateRangeAlertReflection.Descriptor, },
+          new pbr::FileDescriptor[] { global::DotnetWorkoutKit.Protobuf.CustomWorkout.Alert.SpeedAlertReflection.Descriptor, global::DotnetWorkoutKit.Protobuf.CustomWorkout.Alert.HeartRateRangeAlertReflection.Descriptor, global::DotnetWorkoutKit.Protobuf.CustomWorkout.Alert.CadenceAlertReflection.Descriptor, global::DotnetWorkoutKit.Protobuf.CustomWorkout.Alert.PowerAlertReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::DotnetWorkoutKit.Protobuf.CustomWorkout.Alert.WorkoutAlert), global::DotnetWorkoutKit.Protobuf.CustomWorkout.Alert.WorkoutAlert.Parser, new[]{ "AlertMetric", "Unknown", "SpeedAlert", "HeartRateRangeAlert" }, null, new[]{ typeof(global::DotnetWorkoutKit.Protobuf.CustomWorkout.Alert.WorkoutAlert.Types.AlertMetricEnum) }, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::DotnetWorkoutKit.Protobuf.CustomWorkout.Alert.WorkoutAlert), global::DotnetWorkoutKit.Protobuf.CustomWorkout.Alert.WorkoutAlert.Parser, new[]{ "AlertMetric", "Unknown", "SpeedAlert", "CadenceAlert", "PowerAlert", "HeartRateRangeAlert" }, null, new[]{ typeof(global::DotnetWorkoutKit.Protobuf.CustomWorkout.Alert.WorkoutAlert.Types.AlertMetricEnum) }, null, null)
           }));
     }
     #endregion
@@ -81,6 +85,8 @@ namespace DotnetWorkoutKit.Protobuf.CustomWorkout.Alert {
       alertMetric_ = other.alertMetric_;
       unknown_ = other.unknown_;
       speedAlert_ = other.speedAlert_ != null ? other.speedAlert_.Clone() : null;
+      cadenceAlert_ = other.cadenceAlert_ != null ? other.cadenceAlert_.Clone() : null;
+      powerAlert_ = other.powerAlert_ != null ? other.powerAlert_.Clone() : null;
       heartRateRangeAlert_ = other.heartRateRangeAlert_ != null ? other.heartRateRangeAlert_.Clone() : null;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
@@ -106,9 +112,6 @@ namespace DotnetWorkoutKit.Protobuf.CustomWorkout.Alert {
     /// <summary>Field number for the "unknown" field.</summary>
     public const int UnknownFieldNumber = 2;
     private uint unknown_;
-    /// <summary>
-    /// Unknown, 2 = range type
-    /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public uint Unknown {
@@ -127,6 +130,30 @@ namespace DotnetWorkoutKit.Protobuf.CustomWorkout.Alert {
       get { return speedAlert_; }
       set {
         speedAlert_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "cadence_alert" field.</summary>
+    public const int CadenceAlertFieldNumber = 5;
+    private global::DotnetWorkoutKit.Protobuf.CustomWorkout.Alert.CadenceAlert cadenceAlert_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public global::DotnetWorkoutKit.Protobuf.CustomWorkout.Alert.CadenceAlert CadenceAlert {
+      get { return cadenceAlert_; }
+      set {
+        cadenceAlert_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "power_alert" field.</summary>
+    public const int PowerAlertFieldNumber = 6;
+    private global::DotnetWorkoutKit.Protobuf.CustomWorkout.Alert.PowerAlert powerAlert_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public global::DotnetWorkoutKit.Protobuf.CustomWorkout.Alert.PowerAlert PowerAlert {
+      get { return powerAlert_; }
+      set {
+        powerAlert_ = value;
       }
     }
 
@@ -160,6 +187,8 @@ namespace DotnetWorkoutKit.Protobuf.CustomWorkout.Alert {
       if (AlertMetric != other.AlertMetric) return false;
       if (Unknown != other.Unknown) return false;
       if (!object.Equals(SpeedAlert, other.SpeedAlert)) return false;
+      if (!object.Equals(CadenceAlert, other.CadenceAlert)) return false;
+      if (!object.Equals(PowerAlert, other.PowerAlert)) return false;
       if (!object.Equals(HeartRateRangeAlert, other.HeartRateRangeAlert)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
@@ -171,6 +200,8 @@ namespace DotnetWorkoutKit.Protobuf.CustomWorkout.Alert {
       if (AlertMetric != global::DotnetWorkoutKit.Protobuf.CustomWorkout.Alert.WorkoutAlert.Types.AlertMetricEnum.Unspecified) hash ^= AlertMetric.GetHashCode();
       if (Unknown != 0) hash ^= Unknown.GetHashCode();
       if (speedAlert_ != null) hash ^= SpeedAlert.GetHashCode();
+      if (cadenceAlert_ != null) hash ^= CadenceAlert.GetHashCode();
+      if (powerAlert_ != null) hash ^= PowerAlert.GetHashCode();
       if (heartRateRangeAlert_ != null) hash ^= HeartRateRangeAlert.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
@@ -202,6 +233,14 @@ namespace DotnetWorkoutKit.Protobuf.CustomWorkout.Alert {
         output.WriteRawTag(34);
         output.WriteMessage(SpeedAlert);
       }
+      if (cadenceAlert_ != null) {
+        output.WriteRawTag(42);
+        output.WriteMessage(CadenceAlert);
+      }
+      if (powerAlert_ != null) {
+        output.WriteRawTag(50);
+        output.WriteMessage(PowerAlert);
+      }
       if (heartRateRangeAlert_ != null) {
         output.WriteRawTag(58);
         output.WriteMessage(HeartRateRangeAlert);
@@ -228,6 +267,14 @@ namespace DotnetWorkoutKit.Protobuf.CustomWorkout.Alert {
         output.WriteRawTag(34);
         output.WriteMessage(SpeedAlert);
       }
+      if (cadenceAlert_ != null) {
+        output.WriteRawTag(42);
+        output.WriteMessage(CadenceAlert);
+      }
+      if (powerAlert_ != null) {
+        output.WriteRawTag(50);
+        output.WriteMessage(PowerAlert);
+      }
       if (heartRateRangeAlert_ != null) {
         output.WriteRawTag(58);
         output.WriteMessage(HeartRateRangeAlert);
@@ -250,6 +297,12 @@ namespace DotnetWorkoutKit.Protobuf.CustomWorkout.Alert {
       }
       if (speedAlert_ != null) {
         size += 1 + pb::CodedOutputStream.ComputeMessageSize(SpeedAlert);
+      }
+      if (cadenceAlert_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(CadenceAlert);
+      }
+      if (powerAlert_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(PowerAlert);
       }
       if (heartRateRangeAlert_ != null) {
         size += 1 + pb::CodedOutputStream.ComputeMessageSize(HeartRateRangeAlert);
@@ -277,6 +330,18 @@ namespace DotnetWorkoutKit.Protobuf.CustomWorkout.Alert {
           SpeedAlert = new global::DotnetWorkoutKit.Protobuf.CustomWorkout.Alert.SpeedAlert();
         }
         SpeedAlert.MergeFrom(other.SpeedAlert);
+      }
+      if (other.cadenceAlert_ != null) {
+        if (cadenceAlert_ == null) {
+          CadenceAlert = new global::DotnetWorkoutKit.Protobuf.CustomWorkout.Alert.CadenceAlert();
+        }
+        CadenceAlert.MergeFrom(other.CadenceAlert);
+      }
+      if (other.powerAlert_ != null) {
+        if (powerAlert_ == null) {
+          PowerAlert = new global::DotnetWorkoutKit.Protobuf.CustomWorkout.Alert.PowerAlert();
+        }
+        PowerAlert.MergeFrom(other.PowerAlert);
       }
       if (other.heartRateRangeAlert_ != null) {
         if (heartRateRangeAlert_ == null) {
@@ -316,6 +381,20 @@ namespace DotnetWorkoutKit.Protobuf.CustomWorkout.Alert {
               SpeedAlert = new global::DotnetWorkoutKit.Protobuf.CustomWorkout.Alert.SpeedAlert();
             }
             input.ReadMessage(SpeedAlert);
+            break;
+          }
+          case 42: {
+            if (cadenceAlert_ == null) {
+              CadenceAlert = new global::DotnetWorkoutKit.Protobuf.CustomWorkout.Alert.CadenceAlert();
+            }
+            input.ReadMessage(CadenceAlert);
+            break;
+          }
+          case 50: {
+            if (powerAlert_ == null) {
+              PowerAlert = new global::DotnetWorkoutKit.Protobuf.CustomWorkout.Alert.PowerAlert();
+            }
+            input.ReadMessage(PowerAlert);
             break;
           }
           case 58: {
@@ -359,6 +438,20 @@ namespace DotnetWorkoutKit.Protobuf.CustomWorkout.Alert {
             input.ReadMessage(SpeedAlert);
             break;
           }
+          case 42: {
+            if (cadenceAlert_ == null) {
+              CadenceAlert = new global::DotnetWorkoutKit.Protobuf.CustomWorkout.Alert.CadenceAlert();
+            }
+            input.ReadMessage(CadenceAlert);
+            break;
+          }
+          case 50: {
+            if (powerAlert_ == null) {
+              PowerAlert = new global::DotnetWorkoutKit.Protobuf.CustomWorkout.Alert.PowerAlert();
+            }
+            input.ReadMessage(PowerAlert);
+            break;
+          }
           case 58: {
             if (heartRateRangeAlert_ == null) {
               HeartRateRangeAlert = new global::DotnetWorkoutKit.Protobuf.CustomWorkout.Alert.HeartRateRangeAlert();
@@ -377,13 +470,13 @@ namespace DotnetWorkoutKit.Protobuf.CustomWorkout.Alert {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static partial class Types {
       internal enum AlertMetricEnum {
-        /// <summary>
-        /// Default value
-        /// </summary>
         [pbr::OriginalName("UNSPECIFIED")] Unspecified = 0,
         [pbr::OriginalName("AVERAGE")] Average = 1,
         [pbr::OriginalName("CURRENT")] Current = 2,
+        [pbr::OriginalName("CADENCE")] Cadence = 3,
+        [pbr::OriginalName("POWER_CURRENT")] PowerCurrent = 4,
         [pbr::OriginalName("COUNT_PER_MINUTE")] CountPerMinute = 5,
+        [pbr::OriginalName("POWER_AVERAGE")] PowerAverage = 6,
       }
 
     }

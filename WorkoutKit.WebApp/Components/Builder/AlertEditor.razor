@@ -1,0 +1,75 @@
+@using DotnetWorkoutKit.Models
+@using WorkoutKit.WebApp.Models
+
+<div class="alert-editor">
+    <label class="field">
+        <span class="field-label">Alert</span>
+        <select class="control" @bind="Alert.Kind">
+            @foreach (var k in Enum.GetValues<AlertKind>())
+            {
+                <option value="@k">@k</option>
+            }
+        </select>
+    </label>
+
+    @switch (Alert.Kind)
+    {
+        case AlertKind.HeartRate:
+            <div class="inline-fields">
+                <label class="field"><span class="field-label">Min BPM</span>
+                    <input class="control" type="number" min="1" @bind="Alert.HrLower" /></label>
+                <label class="field"><span class="field-label">Max BPM</span>
+                    <input class="control" type="number" min="1" @bind="Alert.HrUpper" /></label>
+            </div>
+            break;
+        case AlertKind.Speed:
+            <div class="inline-fields">
+                <label class="field"><span class="field-label">Min</span>
+                    <input class="control" type="number" step="0.01" min="0" @bind="Alert.SpeedMin" /></label>
+                <label class="field"><span class="field-label">Max</span>
+                    <input class="control" type="number" step="0.01" min="0" @bind="Alert.SpeedMax" /></label>
+                <label class="field"><span class="field-label">Unit</span>
+                    <select class="control" @bind="Alert.SpeedUnit">
+                        @foreach (var u in Enum.GetValues<SpeedRangeAlert.SpeedUnit>())
+                        {
+                            <option value="@u">@u</option>
+                        }
+                    </select></label>
+                <label class="field"><span class="field-label">Metric</span>
+                    <select class="control" @bind="Alert.SpeedMetric">
+                        @foreach (var m in Enum.GetValues<SpeedRangeAlert.AlertMetric>())
+                        {
+                            <option value="@m">@m</option>
+                        }
+                    </select></label>
+            </div>
+            break;
+        case AlertKind.Cadence:
+            <div class="inline-fields">
+                <label class="field"><span class="field-label">Min (spm)</span>
+                    <input class="control" type="number" min="1" @bind="Alert.CadenceMin" /></label>
+                <label class="field"><span class="field-label">Max (spm)</span>
+                    <input class="control" type="number" min="1" @bind="Alert.CadenceMax" /></label>
+            </div>
+            break;
+        case AlertKind.Power:
+            <div class="inline-fields">
+                <label class="field"><span class="field-label">Min (W)</span>
+                    <input class="control" type="number" step="1" min="0" @bind="Alert.PowerMin" /></label>
+                <label class="field"><span class="field-label">Max (W)</span>
+                    <input class="control" type="number" step="1" min="0" @bind="Alert.PowerMax" /></label>
+                <label class="field"><span class="field-label">Metric</span>
+                    <select class="control" @bind="Alert.PowerMetric">
+                        @foreach (var m in Enum.GetValues<PowerRangeAlert.PowerMetric>())
+                        {
+                            <option value="@m">@m</option>
+                        }
+                    </select></label>
+            </div>
+            break;
+    }
+</div>
+
+@code {
+    [Parameter, EditorRequired] public AlertModel Alert { get; set; } = default!;
+}

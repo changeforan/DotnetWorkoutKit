@@ -21,6 +21,10 @@ public class WorkoutGoalConverter : JsonConverter<WorkoutGoal>
             return JsonSerializer.Deserialize<TimeGoal>(root.GetRawText(), options)
                 ?? throw new JsonException("Failed to deserialize TimeGoal.");
         }
+        else if (root.TryGetProperty("Open", out _))
+        {
+            return new OpenGoal();
+        }
         else
         {
             throw new JsonException("Unknown WorkoutGoal type.");
@@ -29,17 +33,21 @@ public class WorkoutGoalConverter : JsonConverter<WorkoutGoal>
 
     public override void Write(Utf8JsonWriter writer, WorkoutGoal value, JsonSerializerOptions options)
     {
-        if (value is DistanceGoal distanceGoal)
+        switch (value)
         {
-            JsonSerializer.Serialize(writer, distanceGoal, options);
-        }
-        else if (value is TimeGoal timeGoal)
-        {
-            JsonSerializer.Serialize(writer, timeGoal, options);
-        }
-        else
-        {
-            throw new JsonException("Unknown WorkoutGoal type.");
+            case DistanceGoal distanceGoal:
+                JsonSerializer.Serialize(writer, distanceGoal, options);
+                break;
+            case TimeGoal timeGoal:
+                JsonSerializer.Serialize(writer, timeGoal, options);
+                break;
+            case OpenGoal:
+                writer.WriteStartObject();
+                writer.WriteBoolean("Open", true);
+                writer.WriteEndObject();
+                break;
+            default:
+                throw new JsonException("Unknown WorkoutGoal type.");
         }
     }
 }

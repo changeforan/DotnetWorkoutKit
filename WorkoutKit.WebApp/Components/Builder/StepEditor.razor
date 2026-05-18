@@ -1,0 +1,14 @@
+@using WorkoutKit.WebApp.Models
+
+<div class="step-editor">
+    <label class="field">
+        <span class="field-label">Display Name</span>
+        <input class="control" type="text" placeholder="Optional" @bind="Step.DisplayName" />
+    </label>
+    <GoalEditor Goal="Step.Goal" />
+    <AlertEditor Alert="Step.Alert" />
+</div>
+
+@code {
+    [Parameter, EditorRequired] public StepModel Step { get; set; } = default!;
+}

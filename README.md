@@ -23,11 +23,26 @@ So I decoded the binary format of the `.workout` file and created this library t
 - Save `CustomWorkout` as a JSON file, which can be shared with others.
 - Load a `CustomWorkout` from a JSON file.
 
-## Limitations
+### Supported Activity Types
 
-- Only support the `CustomWorkout` type.
-- Only support outdoor running for now.
-- Only support `HeartRateRangeAlert` and `SpeedRangeAlert` for now.
+Running, Cycling, Walking, Hiking, Swimming, Elliptical, Rowing, Yoga, CoreTraining, HighIntensityIntervalTraining, FunctionalStrengthTraining, TraditionalStrengthTraining, StairClimbing, CrossTraining
+
+### Supported Goals
+
+| Goal | Units |
+|------|-------|
+| Distance | Kilometers, Meters, Miles, Feet, Yards |
+| Time | Seconds, Minutes, Hours |
+| Open | (no target) |
+
+### Supported Alerts
+
+| Alert | Options |
+|-------|---------|
+| Heart Rate Range | Lower/Upper bound (BPM) |
+| Speed Range | m/s, km/h, mph; Current or Average metric; Pace string ("5'00\"") |
+| Cadence Range | Min/Max cadence (SPM) |
+| Power Range | Min/Max power (Watts); Current or Average metric |
 
 ## Using DotnetWorkoutKit
 
@@ -42,7 +57,7 @@ var customWorkout = new CustomWorkout(
         warmUp: new WorkoutStep(new DistanceGoal(3, DistanceGoal.DistanceUnit.Kilometers), new HeartRateRangeAlert(144, 153), "Warm Up"),
         blocks: [
             new IntervalBlock([
-                new (IntervalStep.PurposeType.Work, new (new DistanceGoal(3, DistanceGoal.DistanceUnit.Kilometers), new SpeedRangeAlert("4'46\"", "4'38\""))), // The speed can be defined as pace.
+                new (IntervalStep.PurposeType.Work, new (new DistanceGoal(3, DistanceGoal.DistanceUnit.Kilometers), new SpeedRangeAlert("4'46\"", "4'38\""))),
                 new (IntervalStep.PurposeType.Recovery, new (new TimeGoal(TimeSpan.FromMinutes(2))))
                 ], 2),
             new IntervalBlock([
@@ -76,7 +91,25 @@ var json = """
 var customWorkout = json.LoadFromJson();
 ```
 
-> You can find the example in the project `WorkoutKit.ConsoleApp` which is for local testing.
+> The `WorkoutKit.ConsoleApp` project provides a small CLI for local testing:
+>
+> ```bash
+> # Convert a workout JSON file into an Apple .workout binary
+> dotnet run --project WorkoutKit.ConsoleApp -- generate input.json output.workout
+>
+> # Round-trip a workout JSON file through the model
+> dotnet run --project WorkoutKit.ConsoleApp -- tojson input.json output.json
+>
+> # Byte-compare two .workout binaries (skipping the per-serialization UUID)
+> dotnet run --project WorkoutKit.ConsoleApp -- compare a.workout b.workout
+> ```
+>
+> The `WorkoutKit.WebApp` project provides an interactive Blazor Server UI for
+> designing workouts in the browser and downloading them as `.workout` or `.json`:
+>
+> ```bash
+> dotnet run --project WorkoutKit.WebApp
+> ```
 
 2. Save the `CustomWorkout` as a `.workout` file or a JSON file.
 
@@ -93,6 +126,39 @@ File.WriteAllBytes($"{customWorkout.DisplayName}.workout", customWorkout.DataRep
 4. You can preview the workout on your iPhone and import it to Apple Watch.
 
 <img src="https://raw.githubusercontent.com/changeforan/DotnetWorkoutKit/refs/heads/main/IMG_6B672CFD47B3-1.jpeg" alt="Import" width="250" />
+
+## Project Structure
+
+```
+DotnetWorkoutKit/
+├── DotnetWorkoutKit/           # Main library
+│   ├── Models/                 # Public models (CustomWorkout, goals, alerts)
+│   ├── Extensions/             # DataRepresentation/JsonRepresentation
+│   ├── protobuf/               # Proto definitions and generated code
+│   │   ├── CustomWorkout/      # Proto files for workout structure
+│   │   │   └── Alert/          # Proto files for alert types
+│   │   └── Models/             # Auto-generated C# from .proto files
+│   └── JsonConverters/         # Custom JSON serializers
+├── WorkoutKit.ConsoleApp/      # Console app for local testing
+├── WorkoutKit.WebApp/          # Blazor Server UI for building & downloading workouts
+├── test/DotnetWorkoutKitTest/  # Unit tests (xUnit v3)
+└── tools/WorkoutBinaryGenerator/  # Swift tool to generate Apple reference binaries
+```
+
+## Testing
+
+```bash
+# Run unit tests
+dotnet test test/DotnetWorkoutKitTest
+
+# Run with Apple binary comparison (requires macOS with Xcode)
+xcodebuild -project tools/WorkoutBinaryGenerator/WorkoutBinaryGenerator.xcodeproj -scheme WorkoutBinaryGenerator -configuration Debug build
+BUILT_PRODUCTS_DIR=$(xcodebuild -project tools/WorkoutBinaryGenerator/WorkoutBinaryGenerator.xcodeproj -scheme WorkoutBinaryGenerator -configuration Debug -showBuildSettings 2>/dev/null | grep ' BUILT_PRODUCTS_DIR =' | sed 's/.*= //')
+"$BUILT_PRODUCTS_DIR/WorkoutBinaryGenerator" /tmp/apple_workouts
+APPLE_WORKOUT_DIR=/tmp/apple_workouts dotnet test test/DotnetWorkoutKitTest
+```
+
+The CI pipeline runs on `macos-15` to build the Swift tool and compare DotnetWorkoutKit output byte-for-byte against Apple's WorkoutKit.
 
 ## License
 

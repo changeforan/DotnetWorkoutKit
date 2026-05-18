@@ -24,26 +24,25 @@ namespace DotnetWorkoutKit.Protobuf.CustomWorkout.Alert {
     static SpeedAlertReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "CiRDdXN0b21Xb3Jrb3V0L0FsZXJ0L1NwZWVkQWxlcnQucHJvdG8i1wMKClNw",
+            "CiRDdXN0b21Xb3Jrb3V0L0FsZXJ0L1NwZWVkQWxlcnQucHJvdG8iswMKClNw",
             "ZWVkQWxlcnQSNgoRc3BlZWRfcmFuZ2VfYWxlcnQYAiABKAsyGy5TcGVlZEFs",
             "ZXJ0LlNwZWVkUmFuZ2VBbGVydBprCg9TcGVlZFJhbmdlQWxlcnQSKwoLbG93",
             "ZXJfYm91bmQYASABKAsyFi5TcGVlZEFsZXJ0LlNwZWVkQm91bmQSKwoLdXBw",
-            "ZXJfYm91bmQYAiABKAsyFi5TcGVlZEFsZXJ0LlNwZWVkQm91bmQaZwoKU3Bl",
-            "ZWRCb3VuZBIgCgVzcGVlZBgBIAEoCzIRLlNwZWVkQWxlcnQuU3BlZWQSNwoH",
-            "dW5rbm93bhgCIAEoCzImLlNwZWVkQWxlcnQuVW5rbm93bl9XcmFwVUludDMy",
-            "X0ZpeGVkNjQafgoFU3BlZWQSLQoEdW5pdBgBIAEoDjIfLlNwZWVkQWxlcnQu",
-            "U3BlZWQuU3BlZWRVbml0RW51bRINCgVzcGVlZBgCIAEoASI3Cg1TcGVlZFVu",
-            "aXRFbnVtEg8KC1VOU1BFQ0lGSUVEEAASFQoRTUVURVJTX1BFUl9TRUNPTkQQ",
-            "ARo7ChpVbmtub3duX1dyYXBVSW50MzJfRml4ZWQ2NBINCgVmaXJzdBgBIAEo",
-            "DRIOCgZzZWNvbmQYAiABKAFCMKoCLURvdG5ldFdvcmtvdXRLaXQuUHJvdG9i",
-            "dWYuQ3VzdG9tV29ya291dC5BbGVydGIGcHJvdG8z"));
+            "ZXJfYm91bmQYAiABKAsyFi5TcGVlZEFsZXJ0LlNwZWVkQm91bmQaVwoKU3Bl",
+            "ZWRCb3VuZBIgCgVzcGVlZBgBIAEoCzIRLlNwZWVkQWxlcnQuU3BlZWQSJwoJ",
+            "dGltZV91bml0GAIgASgLMhQuU3BlZWRBbGVydC5UaW1lVW5pdBp+CgVTcGVl",
+            "ZBItCgR1bml0GAEgASgOMh8uU3BlZWRBbGVydC5TcGVlZC5TcGVlZFVuaXRF",
+            "bnVtEg0KBXNwZWVkGAIgASgBIjcKDVNwZWVkVW5pdEVudW0SDwoLVU5TUEVD",
+            "SUZJRUQQABIVChFNRVRFUlNfUEVSX1NFQ09ORBABGicKCFRpbWVVbml0EgwK",
+            "BHVuaXQYASABKA0SDQoFdmFsdWUYAiABKAFCMKoCLURvdG5ldFdvcmtvdXRL",
+            "aXQuUHJvdG9idWYuQ3VzdG9tV29ya291dC5BbGVydGIGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
             new pbr::GeneratedClrTypeInfo(typeof(global::DotnetWorkoutKit.Protobuf.CustomWorkout.Alert.SpeedAlert), global::DotnetWorkoutKit.Protobuf.CustomWorkout.Alert.SpeedAlert.Parser, new[]{ "SpeedRangeAlert" }, null, null, null, new pbr::GeneratedClrTypeInfo[] { new pbr::GeneratedClrTypeInfo(typeof(global::DotnetWorkoutKit.Protobuf.CustomWorkout.Alert.SpeedAlert.Types.SpeedRangeAlert), global::DotnetWorkoutKit.Protobuf.CustomWorkout.Alert.SpeedAlert.Types.SpeedRangeAlert.Parser, new[]{ "LowerBound", "UpperBound" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::DotnetWorkoutKit.Protobuf.CustomWorkout.Alert.SpeedAlert.Types.SpeedBound), global::DotnetWorkoutKit.Protobuf.CustomWorkout.Alert.SpeedAlert.Types.SpeedBound.Parser, new[]{ "Speed", "Unknown" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::DotnetWorkoutKit.Protobuf.CustomWorkout.Alert.SpeedAlert.Types.SpeedBound), global::DotnetWorkoutKit.Protobuf.CustomWorkout.Alert.SpeedAlert.Types.SpeedBound.Parser, new[]{ "Speed", "TimeUnit" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::DotnetWorkoutKit.Protobuf.CustomWorkout.Alert.SpeedAlert.Types.Speed), global::DotnetWorkoutKit.Protobuf.CustomWorkout.Alert.SpeedAlert.Types.Speed.Parser, new[]{ "Unit", "Speed_" }, null, new[]{ typeof(global::DotnetWorkoutKit.Protobuf.CustomWorkout.Alert.SpeedAlert.Types.Speed.Types.SpeedUnitEnum) }, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::DotnetWorkoutKit.Protobuf.CustomWorkout.Alert.SpeedAlert.Types.Unknown_WrapUInt32_Fixed64), global::DotnetWorkoutKit.Protobuf.CustomWorkout.Alert.SpeedAlert.Types.Unknown_WrapUInt32_Fixed64.Parser, new[]{ "First", "Second" }, null, null, null, null)})
+            new pbr::GeneratedClrTypeInfo(typeof(global::DotnetWorkoutKit.Protobuf.CustomWorkout.Alert.SpeedAlert.Types.TimeUnit), global::DotnetWorkoutKit.Protobuf.CustomWorkout.Alert.SpeedAlert.Types.TimeUnit.Parser, new[]{ "Unit", "Value" }, null, null, null, null)})
           }));
     }
     #endregion
@@ -98,9 +97,6 @@ namespace DotnetWorkoutKit.Protobuf.CustomWorkout.Alert {
     /// <summary>Field number for the "speed_range_alert" field.</summary>
     public const int SpeedRangeAlertFieldNumber = 2;
     private global::DotnetWorkoutKit.Protobuf.CustomWorkout.Alert.SpeedAlert.Types.SpeedRangeAlert speedRangeAlert_;
-    /// <summary>
-    /// SpeedRangeAlert
-    /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public global::DotnetWorkoutKit.Protobuf.CustomWorkout.Alert.SpeedAlert.Types.SpeedRangeAlert SpeedRangeAlert {
@@ -312,9 +308,6 @@ namespace DotnetWorkoutKit.Protobuf.CustomWorkout.Alert {
         /// <summary>Field number for the "lower_bound" field.</summary>
         public const int LowerBoundFieldNumber = 1;
         private global::DotnetWorkoutKit.Protobuf.CustomWorkout.Alert.SpeedAlert.Types.SpeedBound lowerBound_;
-        /// <summary>
-        /// Lower bound
-        /// </summary>
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
         public global::DotnetWorkoutKit.Protobuf.CustomWorkout.Alert.SpeedAlert.Types.SpeedBound LowerBound {
@@ -327,9 +320,6 @@ namespace DotnetWorkoutKit.Protobuf.CustomWorkout.Alert {
         /// <summary>Field number for the "upper_bound" field.</summary>
         public const int UpperBoundFieldNumber = 2;
         private global::DotnetWorkoutKit.Protobuf.CustomWorkout.Alert.SpeedAlert.Types.SpeedBound upperBound_;
-        /// <summary>
-        /// Upper bound
-        /// </summary>
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
         public global::DotnetWorkoutKit.Protobuf.CustomWorkout.Alert.SpeedAlert.Types.SpeedBound UpperBound {
@@ -558,7 +548,7 @@ namespace DotnetWorkoutKit.Protobuf.CustomWorkout.Alert {
         [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
         public SpeedBound(SpeedBound other) : this() {
           speed_ = other.speed_ != null ? other.speed_.Clone() : null;
-          unknown_ = other.unknown_ != null ? other.unknown_.Clone() : null;
+          timeUnit_ = other.timeUnit_ != null ? other.timeUnit_.Clone() : null;
           _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
         }
 
@@ -571,9 +561,6 @@ namespace DotnetWorkoutKit.Protobuf.CustomWorkout.Alert {
         /// <summary>Field number for the "speed" field.</summary>
         public const int SpeedFieldNumber = 1;
         private global::DotnetWorkoutKit.Protobuf.CustomWorkout.Alert.SpeedAlert.Types.Speed speed_;
-        /// <summary>
-        /// Lower bound
-        /// </summary>
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
         public global::DotnetWorkoutKit.Protobuf.CustomWorkout.Alert.SpeedAlert.Types.Speed Speed {
@@ -583,18 +570,15 @@ namespace DotnetWorkoutKit.Protobuf.CustomWorkout.Alert {
           }
         }
 
-        /// <summary>Field number for the "unknown" field.</summary>
-        public const int UnknownFieldNumber = 2;
-        private global::DotnetWorkoutKit.Protobuf.CustomWorkout.Alert.SpeedAlert.Types.Unknown_WrapUInt32_Fixed64 unknown_;
-        /// <summary>
-        /// Unknown
-        /// </summary>
+        /// <summary>Field number for the "time_unit" field.</summary>
+        public const int TimeUnitFieldNumber = 2;
+        private global::DotnetWorkoutKit.Protobuf.CustomWorkout.Alert.SpeedAlert.Types.TimeUnit timeUnit_;
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-        public global::DotnetWorkoutKit.Protobuf.CustomWorkout.Alert.SpeedAlert.Types.Unknown_WrapUInt32_Fixed64 Unknown {
-          get { return unknown_; }
+        public global::DotnetWorkoutKit.Protobuf.CustomWorkout.Alert.SpeedAlert.Types.TimeUnit TimeUnit {
+          get { return timeUnit_; }
           set {
-            unknown_ = value;
+            timeUnit_ = value;
           }
         }
 
@@ -614,7 +598,7 @@ namespace DotnetWorkoutKit.Protobuf.CustomWorkout.Alert {
             return true;
           }
           if (!object.Equals(Speed, other.Speed)) return false;
-          if (!object.Equals(Unknown, other.Unknown)) return false;
+          if (!object.Equals(TimeUnit, other.TimeUnit)) return false;
           return Equals(_unknownFields, other._unknownFields);
         }
 
@@ -623,7 +607,7 @@ namespace DotnetWorkoutKit.Protobuf.CustomWorkout.Alert {
         public override int GetHashCode() {
           int hash = 1;
           if (speed_ != null) hash ^= Speed.GetHashCode();
-          if (unknown_ != null) hash ^= Unknown.GetHashCode();
+          if (timeUnit_ != null) hash ^= TimeUnit.GetHashCode();
           if (_unknownFields != null) {
             hash ^= _unknownFields.GetHashCode();
           }
@@ -646,9 +630,9 @@ namespace DotnetWorkoutKit.Protobuf.CustomWorkout.Alert {
             output.WriteRawTag(10);
             output.WriteMessage(Speed);
           }
-          if (unknown_ != null) {
+          if (timeUnit_ != null) {
             output.WriteRawTag(18);
-            output.WriteMessage(Unknown);
+            output.WriteMessage(TimeUnit);
           }
           if (_unknownFields != null) {
             _unknownFields.WriteTo(output);
@@ -664,9 +648,9 @@ namespace DotnetWorkoutKit.Protobuf.CustomWorkout.Alert {
             output.WriteRawTag(10);
             output.WriteMessage(Speed);
           }
-          if (unknown_ != null) {
+          if (timeUnit_ != null) {
             output.WriteRawTag(18);
-            output.WriteMessage(Unknown);
+            output.WriteMessage(TimeUnit);
           }
           if (_unknownFields != null) {
             _unknownFields.WriteTo(ref output);
@@ -681,8 +665,8 @@ namespace DotnetWorkoutKit.Protobuf.CustomWorkout.Alert {
           if (speed_ != null) {
             size += 1 + pb::CodedOutputStream.ComputeMessageSize(Speed);
           }
-          if (unknown_ != null) {
-            size += 1 + pb::CodedOutputStream.ComputeMessageSize(Unknown);
+          if (timeUnit_ != null) {
+            size += 1 + pb::CodedOutputStream.ComputeMessageSize(TimeUnit);
           }
           if (_unknownFields != null) {
             size += _unknownFields.CalculateSize();
@@ -702,11 +686,11 @@ namespace DotnetWorkoutKit.Protobuf.CustomWorkout.Alert {
             }
             Speed.MergeFrom(other.Speed);
           }
-          if (other.unknown_ != null) {
-            if (unknown_ == null) {
-              Unknown = new global::DotnetWorkoutKit.Protobuf.CustomWorkout.Alert.SpeedAlert.Types.Unknown_WrapUInt32_Fixed64();
+          if (other.timeUnit_ != null) {
+            if (timeUnit_ == null) {
+              TimeUnit = new global::DotnetWorkoutKit.Protobuf.CustomWorkout.Alert.SpeedAlert.Types.TimeUnit();
             }
-            Unknown.MergeFrom(other.Unknown);
+            TimeUnit.MergeFrom(other.TimeUnit);
           }
           _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
         }
@@ -735,10 +719,10 @@ namespace DotnetWorkoutKit.Protobuf.CustomWorkout.Alert {
                 break;
               }
               case 18: {
-                if (unknown_ == null) {
-                  Unknown = new global::DotnetWorkoutKit.Protobuf.CustomWorkout.Alert.SpeedAlert.Types.Unknown_WrapUInt32_Fixed64();
+                if (timeUnit_ == null) {
+                  TimeUnit = new global::DotnetWorkoutKit.Protobuf.CustomWorkout.Alert.SpeedAlert.Types.TimeUnit();
                 }
-                input.ReadMessage(Unknown);
+                input.ReadMessage(TimeUnit);
                 break;
               }
             }
@@ -768,10 +752,10 @@ namespace DotnetWorkoutKit.Protobuf.CustomWorkout.Alert {
                 break;
               }
               case 18: {
-                if (unknown_ == null) {
-                  Unknown = new global::DotnetWorkoutKit.Protobuf.CustomWorkout.Alert.SpeedAlert.Types.Unknown_WrapUInt32_Fixed64();
+                if (timeUnit_ == null) {
+                  TimeUnit = new global::DotnetWorkoutKit.Protobuf.CustomWorkout.Alert.SpeedAlert.Types.TimeUnit();
                 }
-                input.ReadMessage(Unknown);
+                input.ReadMessage(TimeUnit);
                 break;
               }
             }
@@ -842,9 +826,6 @@ namespace DotnetWorkoutKit.Protobuf.CustomWorkout.Alert {
         /// <summary>Field number for the "speed" field.</summary>
         public const int Speed_FieldNumber = 2;
         private double speed_;
-        /// <summary>
-        /// speed in m/s
-        /// </summary>
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
         public double Speed_ {
@@ -1023,9 +1004,6 @@ namespace DotnetWorkoutKit.Protobuf.CustomWorkout.Alert {
         [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
         public static partial class Types {
           internal enum SpeedUnitEnum {
-            /// <summary>
-            /// Default value
-            /// </summary>
             [pbr::OriginalName("UNSPECIFIED")] Unspecified = 0,
             [pbr::OriginalName("METERS_PER_SECOND")] MetersPerSecond = 1,
           }
@@ -1036,16 +1014,16 @@ namespace DotnetWorkoutKit.Protobuf.CustomWorkout.Alert {
       }
 
       [global::System.Diagnostics.DebuggerDisplayAttribute("{ToString(),nq}")]
-      internal sealed partial class Unknown_WrapUInt32_Fixed64 : pb::IMessage<Unknown_WrapUInt32_Fixed64>
+      internal sealed partial class TimeUnit : pb::IMessage<TimeUnit>
       #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
           , pb::IBufferMessage
       #endif
       {
-        private static readonly pb::MessageParser<Unknown_WrapUInt32_Fixed64> _parser = new pb::MessageParser<Unknown_WrapUInt32_Fixed64>(() => new Unknown_WrapUInt32_Fixed64());
+        private static readonly pb::MessageParser<TimeUnit> _parser = new pb::MessageParser<TimeUnit>(() => new TimeUnit());
         private pb::UnknownFieldSet _unknownFields;
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-        public static pb::MessageParser<Unknown_WrapUInt32_Fixed64> Parser { get { return _parser; } }
+        public static pb::MessageParser<TimeUnit> Parser { get { return _parser; } }
 
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -1061,7 +1039,7 @@ namespace DotnetWorkoutKit.Protobuf.CustomWorkout.Alert {
 
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-        public Unknown_WrapUInt32_Fixed64() {
+        public TimeUnit() {
           OnConstruction();
         }
 
@@ -1069,65 +1047,59 @@ namespace DotnetWorkoutKit.Protobuf.CustomWorkout.Alert {
 
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-        public Unknown_WrapUInt32_Fixed64(Unknown_WrapUInt32_Fixed64 other) : this() {
-          first_ = other.first_;
-          second_ = other.second_;
+        public TimeUnit(TimeUnit other) : this() {
+          unit_ = other.unit_;
+          value_ = other.value_;
           _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
         }
 
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-        public Unknown_WrapUInt32_Fixed64 Clone() {
-          return new Unknown_WrapUInt32_Fixed64(this);
+        public TimeUnit Clone() {
+          return new TimeUnit(this);
         }
 
-        /// <summary>Field number for the "first" field.</summary>
-        public const int FirstFieldNumber = 1;
-        private uint first_;
-        /// <summary>
-        /// Unknown, always 1
-        /// </summary>
+        /// <summary>Field number for the "unit" field.</summary>
+        public const int UnitFieldNumber = 1;
+        private uint unit_;
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-        public uint First {
-          get { return first_; }
+        public uint Unit {
+          get { return unit_; }
           set {
-            first_ = value;
+            unit_ = value;
           }
         }
 
-        /// <summary>Field number for the "second" field.</summary>
-        public const int SecondFieldNumber = 2;
-        private double second_;
-        /// <summary>
-        /// Unknown, always 1
-        /// </summary>
+        /// <summary>Field number for the "value" field.</summary>
+        public const int ValueFieldNumber = 2;
+        private double value_;
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-        public double Second {
-          get { return second_; }
+        public double Value {
+          get { return value_; }
           set {
-            second_ = value;
+            value_ = value;
           }
         }
 
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
         public override bool Equals(object other) {
-          return Equals(other as Unknown_WrapUInt32_Fixed64);
+          return Equals(other as TimeUnit);
         }
 
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-        public bool Equals(Unknown_WrapUInt32_Fixed64 other) {
+        public bool Equals(TimeUnit other) {
           if (ReferenceEquals(other, null)) {
             return false;
           }
           if (ReferenceEquals(other, this)) {
             return true;
           }
-          if (First != other.First) return false;
-          if (!pbc::ProtobufEqualityComparers.BitwiseDoubleEqualityComparer.Equals(Second, other.Second)) return false;
+          if (Unit != other.Unit) return false;
+          if (!pbc::ProtobufEqualityComparers.BitwiseDoubleEqualityComparer.Equals(Value, other.Value)) return false;
           return Equals(_unknownFields, other._unknownFields);
         }
 
@@ -1135,8 +1107,8 @@ namespace DotnetWorkoutKit.Protobuf.CustomWorkout.Alert {
         [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
         public override int GetHashCode() {
           int hash = 1;
-          if (First != 0) hash ^= First.GetHashCode();
-          if (Second != 0D) hash ^= pbc::ProtobufEqualityComparers.BitwiseDoubleEqualityComparer.GetHashCode(Second);
+          if (Unit != 0) hash ^= Unit.GetHashCode();
+          if (Value != 0D) hash ^= pbc::ProtobufEqualityComparers.BitwiseDoubleEqualityComparer.GetHashCode(Value);
           if (_unknownFields != null) {
             hash ^= _unknownFields.GetHashCode();
           }
@@ -1155,13 +1127,13 @@ namespace DotnetWorkoutKit.Protobuf.CustomWorkout.Alert {
         #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
           output.WriteRawMessage(this);
         #else
-          if (First != 0) {
+          if (Unit != 0) {
             output.WriteRawTag(8);
-            output.WriteUInt32(First);
+            output.WriteUInt32(Unit);
           }
-          if (Second != 0D) {
+          if (Value != 0D) {
             output.WriteRawTag(17);
-            output.WriteDouble(Second);
+            output.WriteDouble(Value);
           }
           if (_unknownFields != null) {
             _unknownFields.WriteTo(output);
@@ -1173,13 +1145,13 @@ namespace DotnetWorkoutKit.Protobuf.CustomWorkout.Alert {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
         void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
-          if (First != 0) {
+          if (Unit != 0) {
             output.WriteRawTag(8);
-            output.WriteUInt32(First);
+            output.WriteUInt32(Unit);
           }
-          if (Second != 0D) {
+          if (Value != 0D) {
             output.WriteRawTag(17);
-            output.WriteDouble(Second);
+            output.WriteDouble(Value);
           }
           if (_unknownFields != null) {
             _unknownFields.WriteTo(ref output);
@@ -1191,10 +1163,10 @@ namespace DotnetWorkoutKit.Protobuf.CustomWorkout.Alert {
         [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
         public int CalculateSize() {
           int size = 0;
-          if (First != 0) {
-            size += 1 + pb::CodedOutputStream.ComputeUInt32Size(First);
+          if (Unit != 0) {
+            size += 1 + pb::CodedOutputStream.ComputeUInt32Size(Unit);
           }
-          if (Second != 0D) {
+          if (Value != 0D) {
             size += 1 + 8;
           }
           if (_unknownFields != null) {
@@ -1205,15 +1177,15 @@ namespace DotnetWorkoutKit.Protobuf.CustomWorkout.Alert {
 
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-        public void MergeFrom(Unknown_WrapUInt32_Fixed64 other) {
+        public void MergeFrom(TimeUnit other) {
           if (other == null) {
             return;
           }
-          if (other.First != 0) {
-            First = other.First;
+          if (other.Unit != 0) {
+            Unit = other.Unit;
           }
-          if (other.Second != 0D) {
-            Second = other.Second;
+          if (other.Value != 0D) {
+            Value = other.Value;
           }
           _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
         }
@@ -1235,11 +1207,11 @@ namespace DotnetWorkoutKit.Protobuf.CustomWorkout.Alert {
                 _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
                 break;
               case 8: {
-                First = input.ReadUInt32();
+                Unit = input.ReadUInt32();
                 break;
               }
               case 17: {
-                Second = input.ReadDouble();
+                Value = input.ReadDouble();
                 break;
               }
             }
@@ -1262,11 +1234,11 @@ namespace DotnetWorkoutKit.Protobuf.CustomWorkout.Alert {
                 _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
                 break;
               case 8: {
-                First = input.ReadUInt32();
+                Unit = input.ReadUInt32();
                 break;
               }
               case 17: {
-                Second = input.ReadDouble();
+                Value = input.ReadDouble();
                 break;
               }
             }

@@ -35,7 +35,7 @@ The `.workout` file is a Protocol Buffers binary. The proto definitions are in `
 - `DotnetWorkoutKit/Extensions/DataExtensions.cs` - Core serialization: converts models to protobuf binary and JSON
 - `DotnetWorkoutKit/protobuf/` - Proto definitions and auto-generated C# code
 - `DotnetWorkoutKit/JsonConverters/` - Custom JSON converters for polymorphic types (WorkoutAlert, WorkoutGoal)
-- `WorkoutKit.ConsoleApp/` - Console app for local testing
+- `WorkoutKit.ConsoleApp/` - CLI for local testing (`generate`, `tojson`, `compare` subcommands that operate on file paths)
 - `test/DotnetWorkoutKitTest/` - xUnit v3 tests
 - `tools/WorkoutBinaryGenerator/` - Swift/Xcode tool that generates reference `.workout` files using Apple's real WorkoutKit framework
 

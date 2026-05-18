@@ -91,7 +91,18 @@ var json = """
 var customWorkout = json.LoadFromJson();
 ```
 
-> You can find the example in the project `WorkoutKit.ConsoleApp` which is for local testing.
+> The `WorkoutKit.ConsoleApp` project provides a small CLI for local testing:
+>
+> ```bash
+> # Convert a workout JSON file into an Apple .workout binary
+> dotnet run --project WorkoutKit.ConsoleApp -- generate input.json output.workout
+>
+> # Round-trip a workout JSON file through the model
+> dotnet run --project WorkoutKit.ConsoleApp -- tojson input.json output.json
+>
+> # Byte-compare two .workout binaries (skipping the per-serialization UUID)
+> dotnet run --project WorkoutKit.ConsoleApp -- compare a.workout b.workout
+> ```
 
 2. Save the `CustomWorkout` as a `.workout` file or a JSON file.
 

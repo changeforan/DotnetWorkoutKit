@@ -1,3 +1,6 @@
-DotnetWorkoutKit 1.0.1.9
+DotnetWorkoutKit 1.0.2.0
 ========================
-Add support for JSON serialization and deserialization
+- Add Cadence range alert and Power range alert
+- Add Blazor Server WebApp (WorkoutKit.WebApp) for building and downloading workouts in the browser
+- Refactor WorkoutKit.ConsoleApp CLI (`generate`, `tojson`, `compare` subcommands)
+- Apple binary comparison tests against Apple's WorkoutKit reference output

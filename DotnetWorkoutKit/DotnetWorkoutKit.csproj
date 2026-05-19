@@ -8,7 +8,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <AssemblyTitle>DotnetWorkoutKit</AssemblyTitle>
-    <VersionPrefix>1.0.1</VersionPrefix>
+    <VersionPrefix>1.0.2</VersionPrefix>
     <Authors>changeforan@gmail.com</Authors>
     <AssemblyName>DotnetWorkoutKit</AssemblyName>
     <PackageId>DotnetWorkoutKit</PackageId>
@@ -17,6 +17,7 @@
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <SignAssembly>true</SignAssembly>
     <DebugSymbols>true</DebugSymbols>
+    <PackageReleaseNotes>$([System.IO.File]::ReadAllText('RELEASE_NOTES.txt'))</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>

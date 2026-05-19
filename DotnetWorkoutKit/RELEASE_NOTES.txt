@@ -1,4 +1,4 @@
-DotnetWorkoutKit 1.0.2.0
+DotnetWorkoutKit 1.0.2.11
 ========================
 - Add Cadence range alert and Power range alert
 - Add Blazor Server WebApp (WorkoutKit.WebApp) for building and downloading workouts in the browser
